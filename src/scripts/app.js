@@ -1,2 +1,4 @@
 
-angular.module('classroom', []);
+angular.module('classroom', [
+  'ui.router'
+]);
