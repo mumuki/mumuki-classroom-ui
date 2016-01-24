@@ -1,4 +1,4 @@
-nav.navbar.navbar-default.navbar-static-top
+nav.navbar.navbar-default.navbar-static-top(ng-controller="NavbarController")
   .container
 
     .navbar-header
@@ -13,7 +13,9 @@ nav.navbar.navbar-default.navbar-static-top
     #navbar-main.collapse.navbar-collapse
 
       ul.nav.navbar-nav.navbar-right
-        li
-          a(href="") Cerrar sesión
-        li
-          a(href="") Iniciar sesión
+
+        li(ng-if='isLoggedIn()')
+          a(href="", ng-click="signout()") Cerrar sesión
+
+        li(ng-if='!isLoggedIn()')
+          a(href="", ng-click="signin()") Iniciar sesión

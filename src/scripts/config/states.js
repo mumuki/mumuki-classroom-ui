@@ -30,4 +30,18 @@ angular
       $injector.get('$state').go('classroom.home', {}, { reload: true, location: 'replace' });
     });
 
+  })
+  .run(($rootScope, $state, jwtHelper, Auth) => {
+
+    $rootScope.$on('$stateChangeStart', function(ev, toState) {
+
+      Auth.authenticateIfPossible();
+
+      if(toState.authenticated && !Auth.isLoggedIn()){
+        $state.go('home', {}, { location: 'replace' });
+        ev.preventDefault();
+      }
+
+    });
+
   });
