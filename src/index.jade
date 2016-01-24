@@ -13,7 +13,7 @@ html.no-js(lang='es')
     // endbower
     // endbuild
 
-    link(type='text/css', href='styles/main.css')
+    link(rel='stylesheet', href='styles/main.css')
 
   body(ng-app='classroom')
 
@@ -25,7 +25,7 @@ html.no-js(lang='es')
         a(href='http://browsehappy.com/') upgrade your browser
         |  to improve your experience.
 
-    div {{ ['Mumuki', 'Classroom'].join(' ') }}
+    <div ui-view></div>
 
     // build:js scripts/vendor.js
     // bower:js

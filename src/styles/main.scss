@@ -1,4 +1,8 @@
 
-body {
-  background-color: #EEE
-}
+// Bower
+@import '../bower_components/font-awesome/scss/font-awesome';
+@import '../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+
+// Font
+@import 'fonts';
+@import 'home';

@@ -61,9 +61,15 @@ gulp.task('dev:fonts', () => {
     .pipe($.livereload());
 });
 
+gulp.task('dev:images', () => {
+  return gulp.src([`${srcFolder}/images/**/*`])
+    .pipe(gulp.dest(`${outFolder}/images`))
+    .pipe($.livereload());
+});
+
 gulp.task('dev:jade', ['dev:jade:index', 'dev:jade:views']);
 
-gulp.task('dev:build', ['dev:js', 'dev:jade', 'dev:scss', 'dev:fonts']);
+gulp.task('dev:build', ['dev:js', 'dev:jade', 'dev:scss', 'dev:fonts', 'dev:images']);
 
 gulp.task('dev:serve', ['dev:build'], () => {
   return gulp.src(`${outFolder}`)
@@ -79,6 +85,7 @@ gulp.task('dev:watch', () => {
   gulp.watch(`${configFile()}`, ['dev:js']);
   gulp.watch(`${srcFolder}/index.jade`, ['dev:jade:index']);
   gulp.watch(`${srcFolder}/fonts/**/*`, ['dev:fonts']);
+  gulp.watch(`${srcFolder}/images/**/*`, ['dev:images']);
   gulp.watch(`${srcFolder}/scripts/**/*.js`, ['dev:js']);
   gulp.watch(`${srcFolder}/styles/**/*.scss`, ['dev:scss']);
   gulp.watch(`${srcFolder}/views/**/*.jade`, ['dev:jade:views']);
