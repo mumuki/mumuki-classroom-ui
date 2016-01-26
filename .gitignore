@@ -4,6 +4,7 @@ build/
 coverage/
 node_modules/
 bower_components/
+src/scripts/config/config.js
 
 *.log
 
