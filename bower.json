@@ -18,6 +18,8 @@
     "devicons": "1.8.0",
     "font-awesome": "4.5.0",
     "bootstrap-sass": "3.3.6",
+    "google-diff-match-patch-js": "1.0.0",
+    "ace-builds": "1.2.0",
     "angular": "1.4.9",
     "angular-ui-router": "0.2.15",
     "angular-cookies": "1.4.9",
