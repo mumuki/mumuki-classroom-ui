@@ -18,7 +18,7 @@
 
 
   .row.guide-progress-main
-    .col-md-4.col-sm-6(ng-repeat='progress in guideProgress | orderBy:sortingCriteria')
+    .col-md-4.col-sm-6(ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress)')
       .row.guide-progress-blog
         span.col-sm-8
           img.rounded-x(ng-src='{{ progress.student.image_url }}')

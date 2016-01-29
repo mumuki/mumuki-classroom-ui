@@ -38,8 +38,8 @@ angular
 
     $scope.sortingCriteria = (progress) => {
       return $scope.sortType === 'name' ?
-        progress.student.name :
-        $scope.progressFor(progress);
+        ['student.name'] :
+        [$scope.progressFor, 'exercises.length'];
     };
 
     $scope.displayExerciseName = (exercise) => {
