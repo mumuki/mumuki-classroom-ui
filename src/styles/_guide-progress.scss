@@ -1,8 +1,61 @@
 
+@mixin colorize-exercise-status($color) {
+  color: $color
+}
+
+@mixin guide-progress($color) {
+  color: $color;
+}
+
+.colorize-exercise-status.fa-times { @include colorize-exercise-status($brand-danger) }
+.colorize-exercise-status.fa-check { @include colorize-exercise-status($brand-success) }
+.colorize-exercise-status.fa-exclamation { @include colorize-exercise-status($brand-warning) }
+.colorize-exercise-status.fa-circle { @include colorize-exercise-status($text-muted) }
+
+.guide-progress-high { @include guide-progress($brand-success) }
+.guide-progress-medium { @include guide-progress(#333333) }
+.guide-progress-low { @include guide-progress($brand-danger) }
+
 .guide-progress-header {
   margin-bottom: 15px;
 }
 
 .option-buttons {
   margin-top: 15px;
+}
+
+.guide-progress-blog {
+  padding: 20px;
+  border: 1px solid #f0f0f0;
+}
+
+.guide-progress-blog img {
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.rounded-x {
+  border-radius: 50% !important;
+}
+
+.name-location {
+  overflow: hidden;
+}
+
+.student-guide-details section {
+  margin-top: 15px;
+}
+
+.detail-title {
+  margin-top: 15px;
+}
+
+.option-buttons {
+  margin-top: 15px;
+}
+
+pre {
+  margin-top: 5px;
 }

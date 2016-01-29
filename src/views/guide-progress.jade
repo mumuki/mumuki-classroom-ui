@@ -16,3 +16,48 @@
             label.btn.btn-default(ng-model='sortType', ng-click='sortType = "progress"') Por progreso
             label.btn.btn-default(ng-model='sortType', ng-click='sortType = "name"') Por nombre
 
+
+  .row.guide-progress-main
+    .col-md-4.col-sm-6(ng-repeat='progress in guideProgress | orderBy:sortingCriteria')
+      .row.guide-progress-blog
+        span.col-sm-8
+          img.rounded-x(ng-src='{{ progress.student.image_url }}')
+          span.name-location
+            strong {{ progress.student.name }}
+
+        span.col-sm-4
+          h4.pull-right(ng-class='"guide-progress-" + progressClass(progress)')
+            strong {{ statsFor(progress).passed || 0 }}
+            span &nbsp;/&nbsp;
+            span {{ statsFor(progress).total }}
+
+        .student-guide-details(ng-show='showDetails')
+          .row(ng-if='!hasSubmissions(progress)')
+            .col-sm-12.detail-title
+              h4 No hay soluciones por el momento &nbsp;
+                i.fa.fa-frown-o
+
+          div(ng-if='hasSubmissions(progress)')
+            section
+              .row
+                .col-sm-12.detail-title
+                  strong Ejercicios
+              .row(ng-repeat='exercise in progress.exercises')
+                span.col-sm-10
+                  a
+                    | {{ displayExerciseName(exercise) }}
+                span.col-sm-2.pull-right
+                  status-icon(status='lastExerciseSubmissionFor(exercise).status')
+            section
+              .row
+                .col-sm-12.detail-title
+                  strong Última solución enviada
+              .row
+                span.col-sm-10
+                  span {{ displayExerciseName(lastExerciseSubmitted(progress)) }}
+                span.col-sm-2.pull-right
+                  status-icon(status='lastLiveSubmissionFor(progress).status')
+                .col-sm-12
+                  pre
+                    code
+                      | {{ lastLiveSubmissionFor(progress).content }}

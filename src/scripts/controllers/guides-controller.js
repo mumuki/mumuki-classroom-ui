@@ -1,18 +1,18 @@
 
 angular
   .module('classroom')
-  .controller('GuidesController', function ($scope, $state, guides, DevIcon) {
+  .controller('GuidesController', function ($scope, $state, $stateParams, guides, DevIcon) {
 
     $scope.list = guides;
     $scope.type = 'Guías';
 
     $scope.getName = (guide) => guide.name;
-    $scope.iconClass = (guide) => `devicons devicons-${DevIcon.from(guide.language)}`;
-    $scope.sortCriteria = (guide) => ['language', 'name'];
+    $scope.iconClass = (guide) => `devicons devicons-${DevIcon.from(guide.language.name)}`;
+    $scope.sortCriteria = (guide) => ['language.name', 'name'];
 
     $scope.open = (guide) => {
-      const [ org, repo ] = guide.guide.slug.split('/');
-      const [ __, course] = guide.course.slug.split('/');
+      const [ org, repo ] = guide.slug.split('/');
+      const course = $stateParams.course;
       $state.go('classroom.guideProgress', { org, repo, course });
     }
 
