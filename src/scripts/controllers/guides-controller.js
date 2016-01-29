@@ -6,9 +6,8 @@ angular
     $scope.list = guides;
     $scope.type = 'Guías';
 
-    $scope.getName = (item) => item.name;
-    $scope.iconClass = (item) => `devicons devicons-${DevIcon.from(item.language)}`;
-    $scope.sortCriteria = (item) => ['language', 'name'];
-
+    $scope.getName = (guide) => guide.name;
+    $scope.iconClass = (guide) => `devicons devicons-${DevIcon.from(guide.language)}`;
+    $scope.sortCriteria = (guide) => ['language', 'name'];
 
   });
