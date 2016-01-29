@@ -1,0 +1,18 @@
+
+.container
+  .row.guide-progress-header
+    h2
+      .col-sm-7
+        | {{ guide.name }}
+        i.devicons(class='devicons-{{ devicon(guide.language) }}')
+        small.show {{ guide.chapter.name }}
+
+      .col-sm-5
+        .option-buttons
+          .btn-group.btn-group-justified.pull-right(role='group')
+            label.btn.btn-default(ng-model='showDetails', ng-click='showDetails = !showDetails')
+             div {{ (showDetails ? 'Ocultar' : 'Mostrar') }} detalles
+          .btn-group.btn-group-justified.pull-right(role='group')
+            label.btn.btn-default(ng-model='sortType', ng-click='sortType = "progress"') Por progreso
+            label.btn.btn-default(ng-model='sortType', ng-click='sortType = "name"') Por nombre
+

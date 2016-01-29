@@ -34,7 +34,9 @@ angular
             controller: 'CoursesController',
             resolve: {
               courses: ($state, Api) => {
-                return Api.getCourses().catch(() => $state.go('classroom.home'));
+                return Api
+                  .getCourses()
+                  .catch(() => $state.go('classroom.home', {}, { location: 'replace' }));
               }
             }
           }
@@ -49,7 +51,26 @@ angular
             controller: 'GuidesController',
             resolve: {
               guides: ($state, $stateParams, Api) => {
-                return Api.getGuides($stateParams).catch(() => $state.go('classroom.courses'));
+                return Api
+                  .getGuides($stateParams)
+                  .catch(() => $state.go('classroom.courses', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
+      })
+      .state('classroom.guideProgress', {
+        url: '/:org/:course/:repo',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/guide-progress.html',
+            controller: 'GuideProgressController',
+            resolve: {
+              guideProgress: ($state, $stateParams, Api) => {
+                return Api
+                  .getGuideProgress($stateParams)
+                  .catch(() => $state.go('classroom.courses.guides', $stateParams, { location: 'replace' }));
               }
             }
           }
@@ -68,7 +89,7 @@ angular
       Auth.authenticateIfPossible();
 
       if(toState.authenticated && !Auth.isLoggedIn()){
-        $state.go('home', {}, { location: 'replace' });
+        $state.go('classroom.home', {}, { location: 'replace' });
         ev.preventDefault();
       }
 

@@ -21,4 +21,10 @@ angular
         .then((res) => res.data.course_guides)
     };
 
+    this.getGuideProgress = ({ org, course, repo }) => {
+      return $http
+        .get(`${API}/guide_progress/${org}/${repo}`, authenticated())
+        .then((res) => res.data.guide_progress)
+    };
+
   });
