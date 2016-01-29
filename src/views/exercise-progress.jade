@@ -1,0 +1,21 @@
+.container
+  .row
+    h1
+      img.rounded-x(ng-src='{{ student.image_url }}', width='100px')
+      span {{ student.name }}
+      small.show {{ exercise.name + ' - ' + guide.name }}
+      small
+        span {{ submissions.length + ' soluciones enviadas' }}
+        span
+          status-icon(status='submissions[submissions.length -1].status')
+
+  nav
+    ul.pagination
+      li
+        a(href='', aria-label='Anterior', ng-click='prev()')
+          span(aria-hidden='true') &laquo;
+      li(ng-repeat='diff in diffs', ng-class='{ active: isSelectedDiff(diff) }', ng-if='!$last')
+        a(href='', ng-click='selectDiff(diff)') {{ $index + 1 }}
+      li
+        a(href='', aria-label='Siguiente', ng-click='next()')
+          span(aria-hidden='true') &raquo;

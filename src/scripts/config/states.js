@@ -75,6 +75,23 @@ angular
             }
           }
         }
+      })
+      .state('classroom.guideProgress.exercise', {
+        url: '/:student/:exercise',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/exercise-progress.html',
+            controller: 'ExerciseProgressController',
+            resolve: {
+              exerciseProgress: ($state, $stateParams, Api) => {
+                return Api
+                  .getExerciseProgress($stateParams)
+                  .catch(() => $state.go('classroom.guideProgress', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
       });
 
     $urlRouterProvider.otherwise(($injector) => {
