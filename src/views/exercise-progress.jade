@@ -21,3 +21,30 @@
           span(aria-hidden='true') &raquo;
 
   ace-diff(language='{{ guide.language.name }}', left='selectedDiff.left.content', right='selectedDiff.right.content')
+
+  .row
+    .col-sm-6(ng-repeat='submission in [ selectedDiff.left, selectedDiff.right ]')
+      .bs-callout(ng-class='"bs-callout-" + statusClass(submission.status)', ng-if='submission.test_results.length')
+        h4 Pruebas
+        p
+          .row(ng-repeat='result in submission.test_results')
+            .col-sm-11
+              span {{ result.title || 'Ejemplo ' + ($index + 1) }}
+            .col-sm-1
+              status-icon(status='result.status')
+
+      .bs-callout(ng-class='"bs-callout-" + statusClass(submission.status)', ng-if='submission.result')
+        h4 Resultado
+        p
+          div(ng-bind-html='trust(submission.result)')
+
+      .bs-callout(ng-class='"bs-callout-" + statusClass(submission.status)', ng-if='submission.expectation_results.length')
+        h4 Expectativas
+        p
+          .row(ng-repeat='expectationResult in submission.expectation_results')
+            .col-sm-11
+              span {{ expectationResult.binding }}
+              i.expectation-arrow
+              span {{ expectationResult.inspection }}
+            .col-sm-1
+              status-icon(status='expectationResult.result')

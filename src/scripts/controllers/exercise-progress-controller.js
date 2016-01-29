@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, exerciseProgress, DevIcon) {
+  .controller('ExerciseProgressController', function ($scope, $sce, exerciseProgress, DevIcon) {
 
     const diffs = [];
 
@@ -26,8 +26,26 @@ angular
 
     $scope.prev = () => $scope.selectDiff(diffs[prev()]);
     $scope.next = () => $scope.selectDiff(diffs[next()]);
+    $scope.trust = (html) => $sce.trustAsHtml(html);
     $scope.selectDiff = (diff) => $scope.selectedDiff = diff;
     $scope.isSelectedDiff = (diff) => _.isEqual($scope.selectedDiff, diff);
+
+    $scope.statusClass = (status) => {
+      switch (status) {
+        case 'failed':
+        case 'errored':
+          return 'danger';
+
+        case 'passed':
+          return 'success';
+
+        case 'passed_with_warnings':
+          return 'warning';
+
+        default:
+          return 'default';
+      }
+    };
 
     $scope.selectDiff(diffs[MIN]);
 
