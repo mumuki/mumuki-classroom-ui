@@ -1,8 +1,8 @@
-nav.navbar.navbar-default.navbar-static-top(ng-controller="NavbarController")
+nav.navbar.navbar-default.navbar-static-top
   .container
 
     .navbar-header
-      button(class="navbar-toggle collapsed", data-toggle="collapse", data-target="#navbar-main")
+      button(class='navbar-toggle collapsed', data-toggle='collapse', data-target='#navbar-main')
         span.icon-bar
         span.icon-bar
         span.icon-bar
@@ -12,10 +12,14 @@ nav.navbar.navbar-default.navbar-static-top(ng-controller="NavbarController")
 
     #navbar-main.collapse.navbar-collapse
 
+      ul.nav.navbar-nav(ng-if='isLoggedIn()')
+        li(ng-class='{ active: $state.is("classroom.courses") }')
+          a(href='', ui-sref='classroom.courses') Mis cursos
+
       ul.nav.navbar-nav.navbar-right
 
         li(ng-if='isLoggedIn()')
-          a(href="", ng-click="signout()") Cerrar sesión
+          a(href='', ng-click='signout()') Cerrar sesión
 
         li(ng-if='!isLoggedIn()')
-          a(href="", ng-click="signin()") Iniciar sesión
+          a(href='', ng-click='signin()') Iniciar sesión

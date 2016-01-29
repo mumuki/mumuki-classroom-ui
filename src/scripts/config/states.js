@@ -12,7 +12,7 @@ angular
           },
           'navbar@classroom': {
             templateUrl: 'views/navbar.html',
-            controller: 'NavbarController',
+            controller: 'NavbarController'
           }
         }
       })
@@ -22,6 +22,21 @@ angular
         views: {
           'content@classroom': {
             templateUrl: 'views/home.html'
+          }
+        }
+      })
+      .state('classroom.courses', {
+        url: '/courses',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/select.html',
+            controller: 'CoursesController',
+            resolve: {
+              courses: ($state, Api) => {
+                return Api.getCourses().catch(() => $state.go('classroom.home'));
+              }
+            }
           }
         }
       });

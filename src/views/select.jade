@@ -1,0 +1,13 @@
+.container
+
+  .input-group
+    i.input-group-addon.fa.fa-search
+    input.form-control(id='filter', placeholder='Filtrar {{ type | lowercase }} disponibles', ng-model='listSearch')
+
+  h3 {{ type }} Disponibles
+
+  div.list-group
+    button.list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch')
+      i(class='{{ iconClass(item) }}')
+      span.divider-vertical
+      span.item-name {{ getName(item) | uppercase }}

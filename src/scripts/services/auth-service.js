@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Auth', function (auth, store, jwtHelper) {
+  .service('Auth', function ($state, auth, store, jwtHelper) {
 
     this.profile = () => {
       return store.get('profile');
@@ -22,6 +22,7 @@ angular
       auth.signout();
       store.remove('token');
       store.remove('profile');
+      $state.go('classroom.home');
     };
 
     this.isLoggedIn = () => {
