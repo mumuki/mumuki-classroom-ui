@@ -7,7 +7,7 @@
   h3 {{ type }} Disponibles
 
   div.list-group
-    button.list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch')
+    button.list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch', ng-click='open(item)')
       i(class='{{ iconClass(item) }}')
       span.divider-vertical
       span.item-name {{ getName(item) | uppercase }}

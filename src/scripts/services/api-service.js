@@ -15,5 +15,10 @@ angular
         .then((res) => res.data.courses)
     };
 
+    this.getGuides = ({ org, course }) => {
+      return $http
+        .get(`${API}/courses/${org}/${course}`, authenticated())
+        .then((res) => res.data.course_guides)
+    };
 
   });

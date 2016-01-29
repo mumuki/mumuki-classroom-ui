@@ -39,6 +39,21 @@ angular
             }
           }
         }
+      })
+      .state('classroom.courses.guides', {
+        url: '/:org/:course',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/select.html',
+            controller: 'GuidesController',
+            resolve: {
+              guides: ($state, $stateParams, Api) => {
+                return Api.getGuides($stateParams).catch(() => $state.go('classroom.courses'));
+              }
+            }
+          }
+        }
       });
 
     $urlRouterProvider.otherwise(($injector) => {
