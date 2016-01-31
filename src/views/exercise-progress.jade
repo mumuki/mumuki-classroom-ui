@@ -20,7 +20,7 @@
         a(href='', aria-label='Siguiente', ng-click='next()')
           span(aria-hidden='true') &raquo;
 
-  ace-diff(language='{{ guide.language.name }}', left='selectedDiff.left.content', right='selectedDiff.right.content')
+  diff-side(language='{{ guide.language.name }}', left='selectedDiff.left.content', right='selectedDiff.right.content')
 
   .row
     .col-sm-6(ng-repeat='submission in [ selectedDiff.left, selectedDiff.right ]')

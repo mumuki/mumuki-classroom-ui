@@ -11,7 +11,7 @@ angular
       diffs.push({ left: value, right: array[index + 1] });
     });
 
-    diffs.unshift({ left: {}, right: _.first(exerciseProgress.exercise.submissions) })
+    diffs.unshift({ left: { content: '' }, right: _.first(exerciseProgress.exercise.submissions) })
 
     const MIN = 0;
     const MAX = diffs.length - 2 ;
