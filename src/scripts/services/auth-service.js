@@ -3,12 +3,19 @@ angular
   .module('classroom')
   .service('Auth', function ($state, auth, store, jwtHelper) {
 
+    const PERMISSION_REGEXP = /^(\*|.*\/\*)$/;
+
     this.profile = () => {
       return store.get('profile');
     }
 
     this.token = () => {
       return store.get('token');
+    }
+
+    this.isAdmin = () => {
+      const permissions = this.profile().classroom.permissions;
+      return _.some(permissions, (permission) => PERMISSION_REGEXP.test(permission));
     }
 
     this.signin = () => {

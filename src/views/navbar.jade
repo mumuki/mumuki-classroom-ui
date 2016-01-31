@@ -18,8 +18,16 @@ nav.navbar.navbar-default.navbar-static-top
 
       ul.nav.navbar-nav.navbar-right
 
-        li(ng-if='isLoggedIn()')
-          a(href='', ng-click='signout()') Cerrar sesión
+        li.dropdown(ng-if='isLoggedIn()')
+          a.dropdown-toggle(href='', data-toggle='dropdown', role='button')
+            img.rounded-x.profile(ng-src='{{ profile().picture }}', width='40px')
+            span.caret
+          ul.dropdown-menu()
+            li
+              a {{ profile().name }}
+            li.divider(role='separator')
+            li
+              a(href='', ng-click='signout()') Cerrar sesión
 
         li(ng-if='!isLoggedIn()')
           a(href='', ng-click='signin()') Iniciar sesión
