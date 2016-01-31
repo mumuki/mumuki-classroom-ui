@@ -15,51 +15,10 @@ angular
     $scope.devicon = DevIcon.from;
     $scope.sortType = 'progress';
 
-    $scope.statsFor = (progress) => {
-      const stats = _.countBy(progress.exercises, (ex) => _.last(ex.submissions).status);
-      stats.total = _.get(progress, 'exercises.length', 0);
-      return stats;
-    };
-
-    $scope.progressFor = (progress) => {
-      const stats = $scope.statsFor(progress);
-      return (stats.passed / stats.total) || 0;
-    };
-
-    $scope.progressClass = (progress) => {
-      const passedAverage = $scope.progressFor(progress);
-      return passedAverage <= 0.3 ? 'low' :
-             passedAverage <= 0.6 ? 'medium' : 'high';
-    };
-
-    $scope.hasSubmissions = (progress) => {
-      return _.get(progress, 'exercises.length', 0) > 0;
-    };
-
-    $scope.sortingCriteria = (progress) => {
+    $scope.sortingCriteria = () => {
       return $scope.sortType === 'name' ?
         ['student.name'] :
-        [$scope.progressFor, 'exercises.length'];
-    };
-
-    $scope.displayExerciseName = (exercise) => {
-      return `${ exercise.name }`;
-    };
-
-    $scope.lastExerciseSubmitted = (progress) => {
-      return _(progress)
-        .chain()
-        .get('exercises', [])
-        .maxBy((exercise) => _.maxBy(exercise.submissions, 'created_at').created_at)
-        .value();
-    };
-
-    $scope.lastExerciseSubmissionFor = (exercise) => {
-      return _.maxBy(_.get(exercise, 'submissions', []), 'created_at');
-    };
-
-    $scope.lastLiveSubmissionFor = (progress) => {
-      return $scope.lastExerciseSubmissionFor($scope.lastExerciseSubmitted(progress));
+        ['passedAverage()', 'exercises.length'];
     };
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));

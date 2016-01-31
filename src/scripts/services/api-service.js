@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Api', function ($http, Course, Guide, Auth, CONFIG) {
+  .service('Api', function ($http, Course, Guide, GuideProgress, Auth, CONFIG) {
 
     const API = `${CONFIG.classroom.url}/api`;
 
@@ -24,7 +24,7 @@ angular
     this.getGuideProgress = ({ org, course, repo }) => {
       return $http
         .get(`${API}/guide_progress/${org}/${repo}`, authenticated())
-        .then((res) => res.data.guides_progress)
+        .then((res) => _.map(res.data.guides_progress, GuideProgress.from))
     };
 
     this.getExerciseProgress = ({ org, course, repo, student, exercise }) => {

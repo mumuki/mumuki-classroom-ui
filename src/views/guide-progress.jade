@@ -4,7 +4,7 @@
     h2
       .col-sm-7
         | {{ guide.name }}
-        i.devicons(class='devicons-{{ devicon(guide.language) }}')
+        i.devicons(class='{{ guide.iconClass() }}')
         small.show {{ guide.chapter.name }}
 
       .col-sm-5
@@ -26,18 +26,18 @@
             strong {{ progress.student.name }}
 
         span.col-sm-4
-          h4.pull-right(ng-class='"guide-progress-" + progressClass(progress)')
-            strong {{ statsFor(progress).passed || 0 }}
+          h4.pull-right(ng-class='"guide-progress-" + progress.colorClass()')
+            strong {{ progress.stats().passed || 0 }}
             span &nbsp;/&nbsp;
-            span {{ statsFor(progress).total }}
+            span {{ progress.stats().total }}
 
         .student-guide-details(ng-show='showDetails')
-          .row(ng-if='!hasSubmissions(progress)')
+          .row(ng-if='!progress.hasSubmissions()')
             .col-sm-12.detail-title
               h4 No hay soluciones por el momento &nbsp;
                 i.fa.fa-frown-o
 
-          div(ng-if='hasSubmissions(progress)')
+          div(ng-if='progress.hasSubmissions()')
             section
               .row
                 .col-sm-12.detail-title
@@ -45,19 +45,20 @@
               .row(ng-repeat='exercise in progress.exercises')
                 span.col-sm-10
                   a(ui-sref='classroom.guideProgress.exercise({ student: progress.student.id, exercise: exercise.id })')
-                    | {{ displayExerciseName(exercise) }}
+                    | {{ exercise.getName() }}
                 span.col-sm-2.pull-right
-                  status-icon(status='lastExerciseSubmissionFor(exercise).status')
+                  status-icon(status='exercise.lastSubmission().status')
             section
               .row
                 .col-sm-12.detail-title
                   strong Última solución enviada
               .row
                 span.col-sm-10
-                  span {{ displayExerciseName(lastExerciseSubmitted(progress)) }}
+                  a(ui-sref='classroom.guideProgress.exercise({ student: progress.student.id, exercise: progress.lastExerciseSubmitted().id })')
+                    | {{ progress.lastExerciseSubmitted().getName() }}
                 span.col-sm-2.pull-right
-                  status-icon(status='lastLiveSubmissionFor(progress).status')
+                  status-icon(status='progress.lastSubmission().status')
                 .col-sm-12
                   pre
                     code
-                      | {{ lastLiveSubmissionFor(progress).content }}
+                      | {{ progress.lastSubmission().content }}
