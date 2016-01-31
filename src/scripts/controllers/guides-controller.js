@@ -1,13 +1,11 @@
 
 angular
   .module('classroom')
-  .controller('GuidesController', function ($scope, $state, $stateParams, guides, DevIcon) {
+  .controller('GuidesController', function ($scope, $state, $stateParams, guides) {
 
     $scope.list = guides;
     $scope.type = 'Guías';
 
-    $scope.getName = (guide) => guide.name;
-    $scope.iconClass = (guide) => `devicons devicons-${DevIcon.from(guide.language.name)}`;
     $scope.sortCriteria = (guide) => ['language.name', 'name'];
 
     $scope.open = (guide) => {
