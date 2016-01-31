@@ -1,5 +1,6 @@
 
 process.env.PORT = process.env.PORT || 8080;
+process.env.TENANT = process.env.TENANT || 'central';
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const del = require('del');
@@ -76,7 +77,7 @@ gulp.task('dev:serve', ['dev:build'], () => {
     .pipe($.webserver({
       open: true,
       port: process.env.PORT,
-      host: 'localhost',
+      host: `${process.env.TENANT}.classroom.localmumuki.io`,
       livereload: true
     }));
 });
