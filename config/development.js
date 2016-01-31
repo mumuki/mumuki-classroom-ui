@@ -4,7 +4,7 @@ angular
   .constant('CONFIG', {
 
     classroom: {
-      url: 'http://localhost:4000'
+      url: 'classroom.localmumuki.io:4000'
     },
 
     auth: {

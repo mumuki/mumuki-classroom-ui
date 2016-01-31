@@ -1,9 +1,10 @@
 
 angular
   .module('classroom')
-  .service('Api', function ($http, Course, Guide, GuideProgress, ExerciseProgress, Auth, CONFIG) {
+  .service('Api', function ($http, $location, Course, Guide, GuideProgress, ExerciseProgress, Auth, CONFIG) {
 
-    const API = `${CONFIG.classroom.url}/api`;
+    const subdomain = $location.host().split('classroom')[0];
+    const API = `http://${subdomain}${CONFIG.classroom.url}/api`;
 
     const authenticated = (requestOptions = {}) => _.defaultsDeep(requestOptions, {
       headers: { Authorization: `Bearer ${Auth.token()}` }
