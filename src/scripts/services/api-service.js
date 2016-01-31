@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Api', function ($http, Auth, CONFIG) {
+  .service('Api', function ($http, Course, Auth, CONFIG) {
 
     const API = `${CONFIG.classroom.url}/api`;
 
@@ -12,7 +12,7 @@ angular
     this.getCourses = () => {
       return $http
         .get(`${API}/courses`, authenticated())
-        .then((res) => res.data.courses)
+        .then((res) => _.map(res.data.courses, Course.from))
     };
 
     this.getGuides = ({ org, course }) => {

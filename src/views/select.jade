@@ -8,6 +8,6 @@
 
   div.list-group
     button.list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch', ng-click='open(item)')
-      i(class='{{ iconClass(item) }}')
+      i(class='{{ item.iconClass() }}')
       span.divider-vertical
-      span.item-name {{ getName(item) | uppercase }}
+      span.item-name {{ item.getName() | uppercase }}
