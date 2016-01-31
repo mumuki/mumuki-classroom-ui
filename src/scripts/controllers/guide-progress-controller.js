@@ -43,7 +43,7 @@ angular
     };
 
     $scope.displayExerciseName = (exercise) => {
-      return `${exercise.number}. ${ exercise.name }`;
+      return `${ exercise.name }`;
     };
 
     $scope.lastExerciseSubmitted = (progress) => {
