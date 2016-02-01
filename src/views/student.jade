@@ -1,0 +1,38 @@
+.container
+
+  style.
+    div.error {
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+
+  h3 Actualizá tus datos
+
+  form(ng-submit='update()')
+
+    fieldset.form-group
+      input.form-control(
+          type='text',
+          ng-model='student.first_name',
+          placeholder='Nombre',
+          required,
+          autofocus,
+          ng-init='f1 = false'
+          ng-change='f1 = true')
+      div.error
+        small.text-muted.text-danger(ng-show='!isTextValid(student.first_name) && f1')
+          | El nombre es obligatorio
+
+    fieldset.form-group
+      input.form-control(
+          type='text',
+          ng-model='student.last_name',
+          placeholder='Apellido',
+          required
+          ng-init='f2 = false'
+          ng-change='f2 = true')
+      div.error
+        small.text-muted.text-danger(ng-show='!isTextValid(student.last_name) && f2')
+          | El apellido es obligatorio
+
+      button.btn.btn-primary.pull-right(ng-disabled='!isValid()') Actualizar datos

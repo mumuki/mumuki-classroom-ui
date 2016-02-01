@@ -41,4 +41,9 @@ angular
         .post(`${API}/courses`, { name: name.toLowerCase(), description: description }, authenticated())
     }
 
+    this.updateStudent = (course, { first_name, last_name }) => {
+      return $http
+        .post(`${API}/courses/${course}/students`, { first_name, last_name }, authenticated())
+    }
+
   });
