@@ -1,10 +1,11 @@
 
 angular
   .module('classroom')
-  .controller('CoursesController', function ($scope, $state, courses, Auth) {
+  .controller('CoursesController', function ($scope, $state, courses, Auth, Api) {
 
     $scope.list = courses;
     $scope.type = 'Cursos';
+    $scope.preTitle = _.capitalize(Api.subdomain.replace(/[.]$/g, ''));
 
     $scope.isAdmin = Auth.isAdmin;
     $scope.sortCriteria = () => ['slug'];

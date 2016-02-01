@@ -1,10 +1,14 @@
 .container
 
+  h2 {{ preTitle }} - {{ type }} Disponibles
+
+  br
+
   .input-group
     i.input-group-addon.fa.fa-search
     input.form-control(id='filter', placeholder='Filtrar {{ type | lowercase }} disponibles', ng-model='listSearch')
 
-  h3 {{ type }} Disponibles
+  br
 
   div.list-group
     button.list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch', ng-click='open(item)')

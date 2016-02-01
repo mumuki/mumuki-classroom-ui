@@ -10,6 +10,8 @@ angular
       headers: { Authorization: `Bearer ${Auth.token()}` }
     })
 
+    this.subdomain = subdomain;
+
     this.getCourses = () => {
       return $http
         .get(`${API}/courses`, authenticated())

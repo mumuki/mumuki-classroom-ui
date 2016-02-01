@@ -5,6 +5,7 @@ angular
 
     $scope.list = guides;
     $scope.type = 'Guías';
+    $scope.preTitle = _.capitalize($stateParams.course.toUpperCase());
 
     $scope.sortCriteria = (guide) => ['language.name', 'name'];
 
