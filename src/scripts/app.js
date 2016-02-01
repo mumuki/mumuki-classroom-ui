@@ -5,5 +5,6 @@ angular.module('classroom', [
   'angular-storage',
   'angular-jwt',
   'ngAnimate',
-  'toastr'
+  'toastr',
+  'angular-clipboard'
 ]);
