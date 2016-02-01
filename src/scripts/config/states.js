@@ -25,6 +25,17 @@ angular
           }
         }
       })
+      .state('classroom.students', {
+        url: '/courses/:course/students',
+        authenticated: false,
+        views: {
+          'navbar@classroom': {},
+          'content@classroom': {
+            templateUrl: 'views/student.html',
+            controller: 'StudentController'
+          }
+        }
+      })
       .state('classroom.courses', {
         url: '/courses',
         authenticated: true,
@@ -49,16 +60,6 @@ angular
           'content@classroom': {
             templateUrl: 'views/new-course.html',
             controller: 'NewCourseController'
-          }
-        }
-      })
-      .state('classroom.courses.students', {
-        url: '/:course/students',
-        authenticated: true,
-        views: {
-          'content@classroom': {
-            templateUrl: 'views/student.html',
-            controller: 'StudentController'
           }
         }
       })

@@ -8,6 +8,10 @@ angular
     const adminRegex = new RegExp(`^(\\\*|\\\*\\\/\\\*|${subdomain}\\\/\\\*)$`);
     const teacherRegex = new RegExp(`^(\\\*|${subdomain})$`);
 
+    this.permissions = () => {
+      return _.get(this.profile(), 'classroom.permissions', '').split(':');
+    }
+
     this.profile = () => {
       return store.get('profile');
     }
@@ -17,13 +21,11 @@ angular
     }
 
     this.isAdmin = () => {
-      const permissions = this.profile().classroom.permissions.split(':');
-      return _.some(permissions, (permission) => adminRegex.test(permission));
+      return _.some(this.permissions(), (p) => adminRegex.test(p));
     }
 
     this.isTeacher = () => {
-      const permissions = this.profile().classroom.permissions.split(':');
-      return _.some(permissions, (permission) => teacherRegex.test(permission.split('/')[0]));
+      return _.some(this.permissions(), (p) => teacherRegex.test(p.split('/')[0]));
     }
 
     this.signin = () => {

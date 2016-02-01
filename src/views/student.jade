@@ -6,7 +6,7 @@
       margin-left: 5px;
     }
 
-  h3 Actualizá tus datos
+  h3 Cargá tus datos
 
   form(ng-submit='update()')
 
@@ -35,4 +35,4 @@
         small.text-muted.text-danger(ng-show='!isTextValid(student.last_name) && f2')
           | El apellido es obligatorio
 
-      button.btn.btn-primary.pull-right(ng-disabled='!isValid()') Actualizar datos
+      button.btn.btn-primary.pull-right(ng-disabled='!isValid()') Cargar datos

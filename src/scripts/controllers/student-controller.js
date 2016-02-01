@@ -12,11 +12,10 @@ angular
     $scope.update = () => {
       return Api
         .updateStudent($stateParams.course, $scope.student)
-        .catch((res) => {})
-        .then(() => $state.go('classroom.home'))
-        .then(() => toastr.success('Gracias por actualizar tus datos'))
+        .then(() => toastr.success('Gracias por cargar tus datos'))
         .catch((res) => toastr.error(res.data.message));
     }
 
+    Auth.signin();
 
   });
