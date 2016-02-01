@@ -13,8 +13,8 @@ angular
 
     $scope.create = () => {
       return Api
-        .createCourse($scope.create)
-        .then(() => $state.go('classroom.courses'))
+        .createCourse($scope.course)
+        .then(() => $state.go('classroom.courses', {}, { reload: true }))
         .then(() => toastr.success('Curso creado satisfactoriamente'))
         .catch((res) => toastr.error(res.data.message));
     }
