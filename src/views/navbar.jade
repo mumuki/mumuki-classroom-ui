@@ -12,7 +12,7 @@ nav.navbar.navbar-default.navbar-static-top
 
     #navbar-main.collapse.navbar-collapse
 
-      ul.nav.navbar-nav(ng-if='isLoggedIn()')
+      ul.nav.navbar-nav(ng-if='isLoggedIn() && isTeacher()')
         li(ng-class='{ active: $state.is("classroom.courses") }')
           a(href='', ui-sref='classroom.courses') Mis cursos
 

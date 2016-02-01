@@ -1,9 +1,12 @@
 
 angular
   .module('classroom')
-  .service('Auth', function ($state, auth, store, jwtHelper) {
+  .service('Auth', function ($state, $location, auth, store, jwtHelper) {
 
-    const PERMISSION_REGEXP = /^(\*|.*\/\*)$/;
+    const subdomain = $location.host().split('classroom')[0].replace(/[.]$/, '');
+
+    const adminRegex = new RegExp(`^(\\\*|\\\*\\\/\\\*|${subdomain}\\\/\\\*)$`);
+    const teacherRegex = new RegExp(`^(\\\*|${subdomain})$`);
 
     this.profile = () => {
       return store.get('profile');
@@ -14,8 +17,13 @@ angular
     }
 
     this.isAdmin = () => {
-      const permissions = this.profile().classroom.permissions;
-      return _.some(permissions, (permission) => PERMISSION_REGEXP.test(permission));
+      const permissions = this.profile().classroom.permissions.split(':');
+      return _.some(permissions, (permission) => adminRegex.test(permission));
+    }
+
+    this.isTeacher = () => {
+      const permissions = this.profile().classroom.permissions.split(':');
+      return _.some(permissions, (permission) => teacherRegex.test(permission.split('/')[0]));
     }
 
     this.signin = () => {
