@@ -1,0 +1,41 @@
+.container
+
+  style.
+    div.error {
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+
+  h3 Nuevo curso
+
+  form(ng-submit='create()')
+
+    fieldset.form-group
+      input.form-control(
+          type='text',
+          ng-model='course.name',
+          placeholder='Nombre del curso',
+          required,
+          autofocus,
+          ng-init='f1 = false'
+          ng-change='f1 = true')
+      div.error
+        small.text-muted.text-danger(ng-show='!isValidName() && f1')
+          | El nombre del curso solo puede contener letras, números, guiónes o guiónes bajos
+
+    fieldset.form-group
+      input.form-control(
+          type='text',
+          ng-model='course.description',
+          placeholder='Descripcion del curso',
+          required
+          ng-init='f2 = false'
+          ng-change='f2 = true')
+      div.error
+        small.text-muted.text-danger(ng-show='!isValidDescription() && f2')
+          | La descripción es obligatoria
+
+      div.alert.alert-danger(ng-show='error')
+        | {{ error }}
+
+      button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-disabled='!isValid()') Crear curso

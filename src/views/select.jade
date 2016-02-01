@@ -11,3 +11,5 @@
       i(class='{{ item.iconClass() }}')
       span.divider-vertical
       span.item-name {{ item.getName() | uppercase }}
+
+  button.btn.btn-primary.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.new') Crear curso

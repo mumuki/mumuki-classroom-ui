@@ -42,6 +42,16 @@ angular
           }
         }
       })
+      .state('classroom.courses.new', {
+        url: '/new',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/new-course.html',
+            controller: 'NewCourseController'
+          }
+        }
+      })
       .state('classroom.courses.guides', {
         url: '/:org/:course',
         authenticated: true,

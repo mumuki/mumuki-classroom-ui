@@ -1,11 +1,12 @@
 
 angular
   .module('classroom')
-  .controller('CoursesController', function ($scope, $state, courses) {
+  .controller('CoursesController', function ($scope, $state, courses, Auth) {
 
     $scope.list = courses;
     $scope.type = 'Cursos';
 
+    $scope.isAdmin = Auth.isAdmin;
     $scope.sortCriteria = () => ['slug'];
 
     $scope.open = (course) => {
