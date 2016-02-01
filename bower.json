@@ -27,6 +27,8 @@
     "a0-angular-storage": "0.0.13",
     "angular-jwt": "0.0.9",
     "jsdiff": "2.2.1",
-    "diff2html": "1.2.0"
+    "diff2html": "1.2.0",
+    "angular-toastr": "1.7.0",
+    "angular-animate": "1.4.9"
   }
 }

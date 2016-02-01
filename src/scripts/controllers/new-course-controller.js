@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('NewCourseController', function ($scope, $state, Auth, Api) {
+  .controller('NewCourseController', function ($scope, $state, toastr, Auth, Api) {
 
     $scope.course = { name: '', description: '' };
     $scope.isAdmin = Auth.isAdmin;
@@ -15,7 +15,8 @@ angular
       return Api
         .createCourse($scope.create)
         .then(() => $state.go('classroom.courses'))
-        .catch((res) => $scope.error = res.data.message );
+        .then(() => toastr.success('Curso creado satisfactoriamente'))
+        .catch((res) => toastr.error(res.data.message));
     }
 
 

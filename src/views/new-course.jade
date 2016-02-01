@@ -35,7 +35,4 @@
         small.text-muted.text-danger(ng-show='!isValidDescription() && f2')
           | La descripción es obligatoria
 
-      div.alert.alert-danger(ng-show='error')
-        | {{ error }}
-
       button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-disabled='!isValid()') Crear curso
