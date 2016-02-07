@@ -33,6 +33,14 @@ gulp.task('dev:js', ['config'], () => {
     .pipe($.livereload());
 });
 
+gulp.task('prod:js', ['config'], () => {
+  return gulp.src([`${srcFolder}/scripts/**/*.js`])
+    .pipe($.babel({ presets: ['es2015'] }))
+    .pipe($.concat('main.js'))
+    .pipe(gulp.dest(`${outFolder}/scripts`))
+    .pipe($.livereload());
+});
+
 gulp.task('jade:views', () => {
   return gulp.src([`${srcFolder}/views/**/*.jade`])
     .pipe($.jade())
@@ -70,7 +78,8 @@ gulp.task('images', () => {
 
 gulp.task('jade', ['jade:index', 'jade:views']);
 
-gulp.task('dev:build', ['dev:js', 'jade', 'scss', 'fonts', 'images']);
+gulp.task('dev:build',  ['dev:js',  'jade', 'scss', 'fonts', 'images']);
+gulp.task('prod:build', ['prod:js', 'jade', 'scss', 'fonts', 'images']);
 
 gulp.task('dev:serve', ['dev:build'], () => {
   return gulp.src(`${outFolder}`)
@@ -92,5 +101,13 @@ gulp.task('dev:watch', () => {
   gulp.watch(`${srcFolder}/views/**/*.jade`, ['jade:views']);
 });
 
-gulp.task('dev', (done) => runSequence('clean', 'dev:serve', 'dev:watch', done));
+gulp.task('dev', (done) => {
+  process.env.NODE_ENV = 'development';
+  runSequence('clean', 'dev:serve', 'dev:watch', done);
+});
+
+gulp.task('prod', (done) => {
+  process.env.NODE_ENV = 'production';
+  runSequence('clean', 'prod:build', done);
+});
 
