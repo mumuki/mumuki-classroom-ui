@@ -33,14 +33,14 @@ gulp.task('dev:js', ['config'], () => {
     .pipe($.livereload());
 });
 
-gulp.task('dev:jade:views', () => {
+gulp.task('jade:views', () => {
   return gulp.src([`${srcFolder}/views/**/*.jade`])
     .pipe($.jade())
     .pipe(gulp.dest(`${outFolder}/views`))
     .pipe($.livereload());
 });
 
-gulp.task('dev:jade:index', () => {
+gulp.task('jade:index', () => {
   return gulp.src([`${srcFolder}/index.jade`])
     .pipe($.wiredep())
     .pipe($.jade({ pretty: true }))
@@ -49,28 +49,28 @@ gulp.task('dev:jade:index', () => {
     .pipe($.livereload());
 });
 
-gulp.task('dev:scss', () => {
+gulp.task('scss', () => {
   return gulp.src([`${srcFolder}/styles/**/*.scss`])
     .pipe($.sass.sync())
     .pipe(gulp.dest(`${outFolder}/styles`))
     .pipe($.livereload());
 });
 
-gulp.task('dev:fonts', () => {
+gulp.task('fonts', () => {
   return gulp.src([`${srcFolder}/fonts/**/*`])
     .pipe(gulp.dest(`${outFolder}/fonts`))
     .pipe($.livereload());
 });
 
-gulp.task('dev:images', () => {
+gulp.task('images', () => {
   return gulp.src([`${srcFolder}/images/**/*`])
     .pipe(gulp.dest(`${outFolder}/images`))
     .pipe($.livereload());
 });
 
-gulp.task('dev:jade', ['dev:jade:index', 'dev:jade:views']);
+gulp.task('jade', ['jade:index', 'jade:views']);
 
-gulp.task('dev:build', ['dev:js', 'dev:jade', 'dev:scss', 'dev:fonts', 'dev:images']);
+gulp.task('dev:build', ['dev:js', 'jade', 'scss', 'fonts', 'images']);
 
 gulp.task('dev:serve', ['dev:build'], () => {
   return gulp.src(`${outFolder}`)
@@ -84,12 +84,12 @@ gulp.task('dev:serve', ['dev:build'], () => {
 
 gulp.task('dev:watch', () => {
   gulp.watch(`${configFile()}`, ['dev:js']);
-  gulp.watch(`${srcFolder}/index.jade`, ['dev:jade:index']);
-  gulp.watch(`${srcFolder}/fonts/**/*`, ['dev:fonts']);
-  gulp.watch(`${srcFolder}/images/**/*`, ['dev:images']);
+  gulp.watch(`${srcFolder}/index.jade`, ['jade:index']);
+  gulp.watch(`${srcFolder}/fonts/**/*`, ['fonts']);
+  gulp.watch(`${srcFolder}/images/**/*`, ['images']);
   gulp.watch(`${srcFolder}/scripts/**/*.js`, ['dev:js']);
-  gulp.watch(`${srcFolder}/styles/**/*.scss`, ['dev:scss']);
-  gulp.watch(`${srcFolder}/views/**/*.jade`, ['dev:jade:views']);
+  gulp.watch(`${srcFolder}/styles/**/*.scss`, ['scss']);
+  gulp.watch(`${srcFolder}/views/**/*.jade`, ['jade:views']);
 });
 
 gulp.task('dev', (done) => runSequence('clean', 'dev:serve', 'dev:watch', done));
