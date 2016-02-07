@@ -18,7 +18,7 @@ angular
           const prefix = (line, pre) => {
             let subLines = line.value.split('\n');
             if (_.isEmpty(_.last(subLines))) subLines.pop();
-            return _.map(subLines, (l) => `${pre}${l}`).join('\n');
+            return _.map(subLines, (l) => `${pre}  ${l}`).join('\n');
           };
 
           const diffLines = _.map(lines, (line) => {
