@@ -42,7 +42,7 @@ gulp.task('dev:jade:views', () => {
 
 gulp.task('dev:jade:index', () => {
   return gulp.src([`${srcFolder}/index.jade`])
-    .pipe($.wiredep({ exclude: 'bower_components/diff2html/src/diff2html.js' }))
+    .pipe($.wiredep())
     .pipe($.jade({ pretty: true }))
     .pipe($.usemin())
     .pipe(gulp.dest(`${outFolder}`))
