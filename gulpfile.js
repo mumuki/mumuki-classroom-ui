@@ -11,7 +11,7 @@ const gulpLoadPlugins = require('gulp-load-plugins');
 const $ = gulpLoadPlugins();
 
 const srcFolder = 'src';
-const outFolder = 'build';
+const outFolder = '../build';
 
 const configFile = () => `config/${process.env.NODE_ENV}.js`;
 
