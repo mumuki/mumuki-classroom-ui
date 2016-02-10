@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Mumuki classroom angular app",
   "scripts": {
-    "postinstall": "node_modules/.bin/bower install",
+    "postinstall": "node_modules/.bin/bower install --allow-root",
     "start": "gulp dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
