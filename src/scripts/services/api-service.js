@@ -4,7 +4,7 @@ angular
   .service('Api', function ($http, $location, Course, Guide, GuideProgress, ExerciseProgress, Auth, CONFIG) {
 
     const subdomain = $location.host().split('classroom')[0];
-    const API = `http://${subdomain}${CONFIG.classroom.url}/api`;
+    const API = `http://${subdomain}${CONFIG.classroom.url}`;
 
     const authenticated = (requestOptions = {}) => _.defaultsDeep(requestOptions, {
       headers: { Authorization: `Bearer ${Auth.token()}` }
