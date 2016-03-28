@@ -23,6 +23,8 @@
         span.col-sm-8
           img.rounded-x(ng-src='{{ progress.student.image_url }}')
           .name-location
+            strong {{ progress.student.fullName() }}
+          .name-location
             strong {{ progress.student.name }}
           .name-location
             small {{ progress.student.email }}

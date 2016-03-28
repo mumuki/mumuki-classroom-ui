@@ -9,6 +9,10 @@ angular
         _.defaults(this, student);
       }
 
+      fullName() {
+        return `${this.last_name}, ${this.first_name}`
+      }
+
       static from(student) {
         return new Student(student);
       }
