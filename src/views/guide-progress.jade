@@ -3,8 +3,11 @@
   .row.guide-progress-header
     h2
       .col-sm-7
-        | {{ guide.name }}
-        i.devicons(class='{{ guide.iconClass() }}')
+        span
+          | {{ guide.name }}
+          i.devicons(class='{{ guide.iconClass() }}')
+        h5
+          a(href='{{ guide.getMumukiURL() }}', target='_blank') Abrir en Atheneum
         small.show {{ guide.chapter.name }}
 
       .col-sm-5

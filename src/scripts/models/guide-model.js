@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .factory('Guide', function (DevIcon) {
+  .factory('Guide', function (DevIcon, Domain) {
 
     class Guide {
 
@@ -11,6 +11,10 @@ angular
 
       getName() {
         return this.name;
+      }
+
+      getMumukiURL() {
+        return `http://${Domain.tenant}mumuki.io/guides/${this.slug}`;
       }
 
       iconClass() {

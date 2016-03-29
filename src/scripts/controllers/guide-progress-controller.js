@@ -1,11 +1,11 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, data, Api, DevIcon, RememberSetting) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, data, Api, DevIcon, Guide, RememberSetting) {
     RememberSetting($scope, 'showDetails');
     RememberSetting($scope, 'sortType');
 
-    const guide = data.guide;
+    const guide = Guide.from(data.guide);
 
     const setGuideProgress = (guideProgress) => $scope.guideProgress = guideProgress;
 
