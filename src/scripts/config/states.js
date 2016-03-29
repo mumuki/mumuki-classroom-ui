@@ -21,7 +21,8 @@ angular
         authenticated: false,
         views: {
           'content@classroom': {
-            templateUrl: 'views/home.html'
+            templateUrl: 'views/home.html',
+            controller: 'HomeController'
           }
         }
       })
@@ -120,14 +121,19 @@ angular
     });
 
   })
-  .run(($rootScope, $state, jwtHelper, Auth) => {
+  .run(($rootScope, $state, Auth) => {
 
     $rootScope.$on('$stateChangeStart', function(ev, toState) {
 
       Auth.authenticateIfPossible();
 
-      if(toState.authenticated && !Auth.isLoggedIn()){
+      if(toState.authenticated && !Auth.isLoggedIn()) {
         $state.go('classroom.home', {}, { location: 'replace' });
+        ev.preventDefault();
+      }
+
+      if(toState.name === 'classroom.home' && Auth.isLoggedIn()) {
+        $state.go('classroom.courses', {}, { location: 'replace' });
         ev.preventDefault();
       }
 

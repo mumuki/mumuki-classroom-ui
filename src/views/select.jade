@@ -22,5 +22,7 @@
       i(class='{{ item.iconClass() }}')
       span.divider-vertical
       span.item-name {{ item.getName() | uppercase }}
+    label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch).length')
+      | No hay {{ type | lowercase }} para mostrar
 
   button.btn.btn-primary.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.new') Crear curso
