@@ -19,9 +19,17 @@
             label.btn.btn-default(ng-model='sortType', ng-click='sortType = "progress"') Por progreso
             label.btn.btn-default(ng-model='sortType', ng-click='sortType = "name"') Por nombre
 
+  br
+
+  .input-group
+    i.input-group-addon.fa.fa-search
+    input.form-control(id='filter', placeholder='Filtrar estudiante', ng-model='listSearch')
+
+  br
 
   .row.guide-progress-main
-    .col-md-4.col-sm-6(ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress)')
+    .col-md-4.col-sm-6(
+        ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch')
       .row.guide-progress-blog
         span.col-sm-8
           img.rounded-x(ng-src='{{ progress.student.image_url }}')
