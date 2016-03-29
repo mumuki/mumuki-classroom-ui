@@ -1,9 +1,9 @@
 
 angular
   .module('classroom')
-  .service('Api', function ($http, $location, Course, Guide, GuideProgress, ExerciseProgress, Auth, CONFIG) {
+  .service('Api', function ($http, $location, Course, Guide, GuideProgress, ExerciseProgress, Auth, Domain, CONFIG) {
 
-    const subdomain = $location.host().split('classroom')[0];
+    const subdomain = Domain.tenant;
     const API = `http://${subdomain}${CONFIG.classroom.url}`;
 
     const authenticated = (requestOptions = {}) => _.defaultsDeep(requestOptions, {
