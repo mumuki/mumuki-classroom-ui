@@ -8,38 +8,6 @@ div.error {
   margin-top: -10px;
   margin-bottom: -10px;
 }
-#banner {
-  position: absolute;
-  width: 100%;
-  height: calc(100% - 100px);
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: start;
-  margin-top: -20px;
-  background: #FAFAFA url("../images/banner.jpg") no-repeat fixed center;
-  background-size: cover;
-  overflow: hidden;
-  text-align: center;
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 1);
-  color: #F5F5F5;
-}
-
-#banner .ahahamojimoji {
-  font-size: 12em;
-}
-
-#banner .classroom {
-  font-size: 4em;
-  line-height: 1;
-  letter-spacing: -1px;
-}
-
-#banner .description {
-  font-size: 1.5em;
-  line-height: 3;
-  letter-spacing: -1px;
-}
 
 .footer {
   position: fixed;

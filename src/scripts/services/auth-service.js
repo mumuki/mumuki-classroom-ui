@@ -32,6 +32,7 @@ angular
       auth.signin({ authParams: { scope: 'openid app_metadata' } }, (profile, token) => {
         store.set('profile', profile);
         store.set('token', token);
+        $state.go('classroom.courses', {}, { reload: true });
       });
     };
 

@@ -1,14 +1,15 @@
-header#banner
-  .ahahamojimoji ム
-  .classroom Classroom
-  .description Estas son las últimas novedades...
+.container
 
-footer.footer
-  span.ahahamojimoji ム
-  span Mumuki
-  = ' | '
-  a(href='http://mumuki.io') Visitá la plataforma
-  = ' | '
-  a(href='http://mumuki.org') Conocé más sobre el proyecto
-  = ' | '
-  a(href='https://github.com/mumuki/mumuki-teacher-tools/issues?state=open') ¿Encontraste algún error?
+  h2 Cursos Disponibles
+
+  br
+
+  .input-group
+    i.input-group-addon.fa.fa-search
+    input.form-control(id='filter', placeholder='Filtrar cursos disponibles', ng-model='listSearch')
+
+  br
+
+  div.list-group
+    label
+      | Tenés que iniciar sesión primero
