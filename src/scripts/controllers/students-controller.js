@@ -1,10 +1,10 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $stateParams, toastr, $filter, students, Auth, Followers, Api) {
+  .controller('StudentsController', function ($scope, $state, $stateParams, toastr, $filter, students, Auth, Followers, Api, Domain) {
 
     $scope.list = students;
-    const course = $stateParams.course;
+    const course = `${Domain.tenant()}/${$stateParams.course}`;
 
     Api.getFollowers(Auth.profile().email)
       .then((data) => {
