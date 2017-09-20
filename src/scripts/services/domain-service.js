@@ -26,6 +26,8 @@ angular
     this.classroomApiURL = () => OrganizationMapper.classroomApiURL();
     this.bibliothecaApiURL = () => OrganizationMapper.bibliothecaApiURL();
 
+    this.invitationURL = (invitationCode) => OrganizationMapper.invitationURL(invitationCode);
+
     this.loginURL = () => OrganizationMapper.loginURL();
     this.logoutURL = () => OrganizationMapper.logoutURL();
 
