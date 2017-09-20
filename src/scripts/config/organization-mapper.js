@@ -25,6 +25,8 @@ angular
       return `${protocol}://${host}${portString}/#${path}/home`;
     }
 
+    const invitationURL = (code) => `${CONFIG.laboratory.url}/join/${code}`
+
     this.organizationMappers = {
 
       subdomain: {
@@ -51,6 +53,10 @@ angular
 
         logoutURL() {
           return `${this.classroomApiURL()}/logout${withOrigin(redirectURL())}`
+        },
+
+        invitationURL(code) {
+          return invitationURL(code);
         },
 
         stateUrl() {
@@ -83,6 +89,10 @@ angular
 
         logoutURL() {
           return `${CONFIG.classroom.url}/logout${withOrigin(redirectURL(this.tenant()))}`
+        },
+
+        invitationURL(code) {
+          return invitationURL(code);
         },
 
         stateUrl() {

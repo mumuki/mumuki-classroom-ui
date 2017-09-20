@@ -50,7 +50,7 @@ angular
       }
 
       invitationLink() {
-        return `${Domain.laboratoryURL()}/join/${this.invitation.code}`;
+        return Domain.invitationURL(this.invitation.code);
       }
 
     }
