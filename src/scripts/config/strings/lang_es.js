@@ -98,6 +98,8 @@ angular
     manual_evaluation: 'Correción manual',
     mark_as_read: 'Marcar como leído',
     mark_as_unread: 'Marcar como no leído',
+    max_problem_submissions: 'Límite de envíos para problemas',
+    max_choice_submissions: 'Límite de envíos para teóricos',
     message: '{{assignment.student.first_name}} {{assignment.student.last_name}} te hizo una pregunta en <strong> "{{assignment.exercise.name}}" </strong>',
     messages: 'Mensajes',
     more_messages: 'Ver más',

@@ -73,6 +73,24 @@
                 placeholder='90',
                 ng-disabled='!hasDuration')
 
+      .col-sm-4
+        label {{ 'max_problem_submissions' | translate }}
+        .form-group
+          .input-group
+            input.form-control(
+            type='text',
+            ng-model='exam.max_problem_submissions',
+            placeholder='5')
+
+      .col-sm-4
+        label {{ 'max_choice_submissions' | translate }}
+        .form-group
+          .input-group
+            input.form-control(
+            type='text',
+            ng-model='exam.max_choice_submissions',
+            placeholder='1')
+
       .container
         button.btn.btn-success.pull-right(ng-disabled='!isValid()')
           | {{ 'save' | translate }}

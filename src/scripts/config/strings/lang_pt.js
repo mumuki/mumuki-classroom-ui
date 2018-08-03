@@ -97,6 +97,8 @@ angular
     manual_evaluation: 'Avaliação manual',
     mark_as_read: 'marcar como Lido',
     mark_as_unread: 'marcar como não lido',
+    max_problem_submissions: 'Limite de envio para problemas',
+    max_choice_submissions: 'Limite de envio para teóricos',
     message: 'Mensagem de {{sender}}',
     messages: 'Mensagens',
     more_messages: 'Carregue mais',
