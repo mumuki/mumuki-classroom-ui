@@ -12,11 +12,15 @@ angular
     $scope.isValidStartTime = () => isBefore();
     $scope.isValidEndTime = () => isBefore();
     $scope.isValidDuration = () => !$scope.hasDuration || $scope.exam.duration > 0;
+    $scope.isValidMaxProblemSubmissions = () => !!$scope.exam.max_problem_submissions && $scope.exam.max_problem_submissions > 0;
+    $scope.isValidMaxChoiceSubmissions = () => !!$scope.exam.max_choice_submissions && $scope.exam.max_choice_submissions > 0;
 
     $scope.isValidMandatoryFields = () =>
       $scope.isValidEndTime() &&
       $scope.isValidDuration() &&
-      $scope.isValidStartTime();
+      $scope.isValidStartTime() &&
+      $scope.isValidMaxProblemSubmissions() &&
+      $scope.isValidMaxChoiceSubmissions();
 
     $scope.isValid = () => $scope.isValidMandatoryFields();
 

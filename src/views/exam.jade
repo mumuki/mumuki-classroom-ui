@@ -32,7 +32,7 @@
             i.fa.fa-clipboard(ng-click='copy()')
             small.text-muted(ng-show='isCopied') &nbsp; {{ 'copied' | translate }}!
 
-      .col-sm-4
+      .col-sm-6
         label {{ 'start_time' | translate }}
         .dropdown.form-group
           #start_time_id.dropdown-toggle.input-group.date.start_time_class(
@@ -46,7 +46,7 @@
                 data-ng-model='exam.start_time',
                 data-datetimepicker-config='{ dropdownSelector: ".start_time_class" }')
 
-      .col-sm-4
+      .col-sm-6
         label {{ 'end_time' | translate }}
         .dropdown.form-group
           #end_time_id.dropdown-toggle.input-group.date.end_time_class(
@@ -73,7 +73,25 @@
                 placeholder='90',
                 ng-disabled='!hasDuration')
 
-      .container
+      .col-sm-4
+        label {{ 'max_problem_submissions' | translate }}
+        .form-group
+          .input-group.block
+            input.form-control(
+            type='text',
+            ng-model='exam.max_problem_submissions',
+            placeholder='5')
+
+      .col-sm-4
+        label {{ 'max_choice_submissions' | translate }}
+        .form-group
+          .input-group.block
+            input.form-control(
+            type='text',
+            ng-model='exam.max_choice_submissions',
+            placeholder='1')
+
+      .col-sm-12
         button.btn.btn-success.pull-right(ng-disabled='!isValid()')
           | {{ 'save' | translate }}
 

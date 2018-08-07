@@ -97,6 +97,8 @@ angular
     manual_evaluation: 'Manual evaluation',
     mark_as_read: 'Mark as read',
     mark_as_unread: 'Mark as unread',
+    max_problem_submissions: 'Max problem submissions',
+    max_choice_submissions: 'Max choice submissions',
     message: 'Message from {{sender}}',
     messages: 'Messages',
     more_messages: 'Load More',
