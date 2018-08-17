@@ -98,3 +98,15 @@ input.form-control[disable="disable"] {
 .view-in-laboratory {
   margin-left: 10px;
 }
+
+.input-group .input-group-btn button.btn-filter {
+  background-color: #ecf0f1;
+  border: 1px solid $input-border;
+  padding: 10px 11px;
+  color: $brand-primary;
+}
+
+.report {
+  text-align: right;
+  margin-top: 10px;
+}

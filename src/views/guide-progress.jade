@@ -9,4 +9,11 @@
       .col-sm-4
         i.pull-right(class='{{ guide.iconClass() }}')
 
+  .row
+    .col-md-3.pull-right.report
+      div
+        a(href='{{ reportUrl() }}' download)
+          span.view-mode {{ 'export_guide_report' | translate }}
+          i.fa.fa-download
+
   div(ng-include='"views/templates/list-header.html"')

@@ -20,7 +20,7 @@
         a(href='', ng-click="copy(course.invitationLink())"): i.fa.fa-fw.fa-clipboard
         span &nbsp;
         span.mu-disabled(ng-if='isCopied') {{ 'copied' | translate }}
-    .col-md-3.pull-right(style='text-align: right; margin-top: 10px')
+    .col-md-3.pull-right.report
       div
         a(ng-click='export()')
           span.view-mode {{ 'export_solutions_button' | translate }}

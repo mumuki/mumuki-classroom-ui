@@ -34,9 +34,18 @@
           select.form-control(ng-model='options.sortingType')
             option(ng-repeat='x in availableSortingCriteria', value='{{x}}') {{ 'by_' + x | translate }}
         .input-group(ng-if='withFilter')
-          span.input-group-addon
+          .input-group-btn(ng-if='withMultipleFilters')
+            button.btn.btn-filter.dropdown-toggle(type="button", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+              i.fa-fw(class='{{currentFilter.icon}}')
+              span.caret
+            ul.dropdown-menu
+              li(ng-repeat='filter in filters')
+                a(href='', ng-click='setCurrentFilter(filter)') {{ filter.text | translate }}
+
+          span.input-group-addon(ng-if='!withMultipleFilters')
             i.fa.fa-search.fa-fw
-          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listOptions.search', ng-change="queryChange()")
+
+          input.form-control(id='filter', placeholder='{{ currentFilter.text | translate }}', ng-model='listOptions.search', ng-change="queryChange()")
 
   .panel-content
     div.col-md-4.col-sm-6.floating-card(ng-repeat='item in list')

@@ -1,7 +1,11 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, $timeout, data, Api, Guide, Breadcrumb, Humanizer, Notification, Domain) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, $timeout, $httpParamSerializer, data, Api, Guide, Breadcrumb, Humanizer, Notification, Domain) {
+
+    $scope.extraFilters = [{
+      queryCriteria: 'passed_assignments', icon: 'fa fa-graduation-cap', text: 'filter_passed_assignments'
+    }];
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -33,6 +37,12 @@ angular
     $scope.totalCount = data.total;
 
     $scope.availableSortingCriteria = [ 'messages', 'name', 'progress', 'last_submission_date' ];
+
+    $scope.reportUrl = () => {
+      let queryParams = $httpParamSerializer($scope.params);
+      let { org, course, repo } = $stateParams;
+      return `${Domain.classroomApiURL()}/courses/${course}/guides/${org}/${repo}/report?${queryParams}`;
+    }
 
     setGuideProgress(data.guideProgress);
 

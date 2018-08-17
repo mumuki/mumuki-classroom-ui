@@ -16,8 +16,17 @@ angular
     $scope.actualPage = 1;
     $scope.itemsPerPage = 30;
 
-    $scope.withSortBy = true;
+    $scope.filters = [{ icon: 'fa fa-search', text: 'filter_students' }];
+    if($scope.extraFilters) $scope.filters.push.apply($scope.filters, $scope.extraFilters);
+
     $scope.withFilter = true;
+    $scope.withMultipleFilters = $scope.filters.length > 1;
+    $scope.currentFilter = $scope.filters[0];
+    $scope.setCurrentFilter = function (filter) {
+      $scope.currentFilter = filter;
+    };
+
+    $scope.withSortBy = true;
     $scope.withDetails = true;
     $scope.withFollowers = true;
     $scope.withDetachedStudents = Permissions.isTeacher();
@@ -46,7 +55,8 @@ angular
       per_page: $scope.itemsPerPage,
       sort_by: $scope.options.sortingType,
       with_detached: $scope.showDetachedStudents(),
-      order_by: mapOrderBy()
+      order_by: mapOrderBy(),
+      query_criteria: ''
     }
 
     $scope.selectPage = (n) => {
@@ -87,6 +97,7 @@ angular
       delayQueryChange = $timeout(() => {
         $scope.params.page = 1;
         $scope.params.q = $scope.listOptions.search;
+        $scope.params.query_criteria = $scope.currentFilter.queryCriteria;
       }, 750);
     }
 

@@ -22,7 +22,6 @@ angular
     $scope.search = () => {
       $timeout.cancel(delaySearch);
       delaySearch = $timeout(() => {
-        console.log($state.params);
         Api
           .getGuideProgress($state.params, { q: $scope.filter.search })
           .then((response) => {
