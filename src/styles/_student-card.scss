@@ -85,7 +85,7 @@ paginator {
     }
 
     .student-card-profile-status {
-      @include display-flex(column, center, flex-end);
+      @include display-flex(column-reverse, center, flex-end);
       .student-card-profile-status-row {
         @include text-ellipsis;
         font-size: 85%;
