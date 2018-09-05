@@ -119,13 +119,13 @@
     .row
       label {{ 'students' | translate }}
       .input-group
-        input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
+        input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='params.q')
         i.input-group-addon.fa.fa-search
 
     br
 
     .row
-      .col-sm-12(ng-repeat='student in students | orderBy:sortCriteria | filter:listSearch:searchComparator')
+      .col-sm-12(ng-repeat='student in students')
         .row.guide-progress-blog
           .col-xs-10
             img.rounded-x(ng-src='{{ student.image_url }}')
@@ -136,17 +136,16 @@
               small(ng-if='student.email')
                 a(href='mailto:{{ student.email }}') {{ student.email }}
           .col-xs-2
-            input.pull-right(type='checkbox', ng-checked='student.isSelected', ng-click='toggle(student)')
+            input.pull-right.pointer(type='checkbox', ng-checked='student.isSelected', ng-click='toggle(student)', ng-disabled='student.isProcessing')
 
     br
 
     paginator.text-center.col-xs-12.col-sm-12.col-md-12.col-lg-12(
-      ng-if='totalCount > itemsPerPage',
-      pg-items-per-page='{{ itemsPerPage }}',
+      ng-if='totalCount > params.per_page',
+      pg-items-per-page='{{ params.per_page }}',
       pg-total-items='totalCount',
-      pg-actual-page='actualPage',
+      pg-actual-page='params.page',
       pg-offset='2',
       pg-click='selectPage')
-
 
   br

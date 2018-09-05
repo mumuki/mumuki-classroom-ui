@@ -126,6 +126,16 @@ angular
         .put(`${API()}/courses/${course}/exams/${exam.eid}`, exam)
     }
 
+    this.addStudentToExam = (course, exam, student) => {
+      return $http
+        .post(`${API()}/courses/${course}/exams/${exam.eid}/students/${student.uid}`, {});
+    }
+
+    this.removeStudentToExam = (course, exam, student) => {
+      return $http
+        .delete(`${API()}/courses/${course}/exams/${exam.eid}/students/${student.uid}`);
+    }
+
     this.getStudents = ({ course }, params = {}) => {
       return $http
         .get(`${API()}/courses/${course}/students`, { params })

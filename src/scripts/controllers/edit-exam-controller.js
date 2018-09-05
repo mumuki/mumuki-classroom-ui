@@ -5,33 +5,30 @@ angular
 
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
-    $scope.students = students.students;
-
-    $scope.itemsPerPage = 30
-    $scope.actualPage = 1,
     $scope.totalCount = students.total;
 
-    const getParams = () => ({
-      page: $scope.actualPage,
-      per_page: $scope.itemsPerPage,
+    $scope.params = {
+      q: '',
+      page: 1,
+      per_page: 30,
+      sort_by: 'name',
       with_detached: false,
-    });
-
-    $scope.params = getParams();
+      order_by: 'asc'
+    }
 
     $scope.selectPage = (n) => {
       $scope.params.page = n;
     }
 
-    $scope.students
-      .filter((student) => _(exam.uids).includes(student.uid))
-      .forEach((student) => student.isSelected = true)
+    $scope.submit = Api.updateExam;
 
     Breadcrumb.setExam(exam);
 
     const isSelected = (student, newVal) => {
-      Api[`${newVal ? 'add' : 'remove'}StudentToExam`](course, exam, student)
+      student.isProcessing = true;
+      Api[`${newVal ? 'add' : 'remove'}StudentToExam`]($state.params.course, $scope.getExam(), student)
         .then(() => student.isSelected = newVal)
+        .then(() => student.isProcessing = false);
     };
 
     $scope.getExam = () => {
@@ -58,16 +55,20 @@ angular
     };
 
     let delayParamsChange;
+
+    const withSelectedStudents = (students) => {
+      students.forEach((student) => student.isSelected = _.includes(exam.uids, student.uid));
+      return students;
+    }
+
     $scope.$watch('params', () => {
       $timeout.cancel(delayParamsChange);
-      $scope.params = getParams();
       delayParamsChange = $timeout(() => {
         Api.getStudents($state.params, $scope.params).then((response) => {
-          $scope.students = response.students;
-          $scope.actualPage = response.page;
+          $scope.students = withSelectedStudents(response.students);
           $scope.totalCount = response.total;
         });
-      }, 100);
+      }, 250);
     }, true);
 
   });
