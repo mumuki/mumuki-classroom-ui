@@ -125,6 +125,7 @@
     br
 
     .row
+      small Haciendo click en #[i.fa.fa-check-square-o] se dará de alta al alumno sin la necesidad de guardar el examen.
       .col-sm-12(ng-repeat='student in students')
         .row.guide-progress-blog
           .col-xs-10
@@ -136,8 +137,9 @@
               small(ng-if='student.email')
                 a(href='mailto:{{ student.email }}') {{ student.email }}
           .col-xs-2
-            input.pull-right.pointer(type='checkbox', ng-checked='student.isSelected', ng-click='toggle(student)', ng-disabled='student.isProcessing')
-
+            label.mu-checkbox.pull-right
+              input(type='checkbox', ng-checked='student.isSelected', ng-click='toggle(student)', ng-disabled='student.isProcessing')
+              span
     br
 
     paginator.text-center.col-xs-12.col-sm-12.col-md-12.col-lg-12(
