@@ -46,7 +46,7 @@ angular
 
     $scope.openExamInLaboratory = () => Domain.openExamInLaboratory($state.params.exam);
 
-    $scope.url = () => Domain.examURL($scope.exam.id);
+    $scope.url = () => Domain.examURL($scope.exam.eid);
 
     $scope.copy = () => {
       clipboard.copyText($scope.url());
