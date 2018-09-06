@@ -4,11 +4,13 @@ classroomTest('Edit Exam Controller', () => {
   const date = moment().toDate();
 
   let $scope;
+  let $state;
   let students;
 
   beforeEach(inject((_$rootScope_, _$controller_) => {
     $scope = _$rootScope_.$new();
     students = [{ uid: 0 }, { uid: 1 }, { uid: 2 }];
+    $state = { params: {course: 'foo' } }
     const exam = {
       id: '0123456789abcdef',
       start_time: date,
@@ -19,7 +21,7 @@ classroomTest('Edit Exam Controller', () => {
       language: 'haskell',
       uids: [1]
     };
-    _$controller_('EditExamController', { $scope, students: {students}, exam });
+    _$controller_('EditExamController', { $scope, students: {students}, exam, $state });
   }));
 
   describe('#getExam', () => {
@@ -38,28 +40,29 @@ classroomTest('Edit Exam Controller', () => {
   });
 
   describe('#toggle', () => {
-    it('when toggle new one should add a uid', () => {
-      $scope.toggle(students[0]);
-      $scope.getExam().uids.should.be.eql([0, 1]);
-    });
-    it('when toggle new one and old one should add a uid', () => {
-      $scope.toggle(students[1]);
-      $scope.toggle(students[2]);
-      $scope.getExam().uids.should.be.eql([2]);
-    });
-  });
 
-  describe('#unselectAll', () => {
-    it('should remove all uids', () => {
-      $scope.unselectAll();
-      $scope.getExam().uids.should.be.eql([]);
-    });
-  });
+    var myPromise = (value) => ({
+      then: (callback) => myPromise(callback(value))
+    })
 
-  describe('#selectAll', () => {
-    it('should add all uids', () => {
-      $scope.selectAll();
-      $scope.getExam().uids.should.be.eql([0, 1, 2]);
+    beforeEach(inject((Api) => {
+      Api.addStudentToExam    = myPromise;
+      Api.removeStudentToExam = myPromise;
+    }));
+
+    it('student is selected', () => {
+      const student = students[0];
+      student.isSelected = false;
+      $scope
+        .toggle(student)
+        .then(() => student.isSelected.should.be.eql(true));
+    });
+    it('student is unselected', () => {
+      const student = students[0];
+      student.isSelected = true;
+      $scope
+        .toggle(student)
+        .then(() => student.isSelected.should.be.eql(false));
     });
   });
 

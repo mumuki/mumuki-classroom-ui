@@ -26,7 +26,7 @@ angular
 
     const isSelected = (student, newVal) => {
       student.isProcessing = true;
-      Api[`${newVal ? 'add' : 'remove'}StudentToExam`]($state.params.course, $scope.getExam(), student)
+      return Api[`${newVal ? 'add' : 'remove'}StudentToExam`]($state.params.course, $scope.getExam(), student)
         .then(() => student.isSelected = newVal)
         .then(() => student.isProcessing = false);
     };
