@@ -26,7 +26,7 @@ angular
       $scope.isValidDescription();
 
     $scope.days = [
-      { name: 'day_monday', checked: false },
+      { name: 'day_monday', checked: true },
       { name: 'day_tuesday', checked: false },
       { name: 'day_wednesday', checked: false },
       { name: 'day_thursday', checked: false },
@@ -36,12 +36,13 @@ angular
     ]
 
     $scope.shifts = [
-      { name: 'shift_morning', checked: false },
+      { name: 'shift_morning', checked: true },
       { name: 'shift_afternoon', checked: false },
       { name: 'shift_night', checked: false },
     ]
 
     $scope.updateArray = (type) => $scope.course[type] = _.filter($scope[type], 'checked');
+    ["days", "shifts"].forEach((it) => $scope.updateArray(it));
 
     $scope.getCheckedNames = (checkables) =>
       _(checkables)
