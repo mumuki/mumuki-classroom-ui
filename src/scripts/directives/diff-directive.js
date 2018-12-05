@@ -1,3 +1,5 @@
+import * as JsDiff from "diff";
+import { Diff2Html } from "diff2html";
 
 angular
   .module('classroom')
