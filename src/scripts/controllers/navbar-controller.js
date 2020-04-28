@@ -20,7 +20,7 @@ angular
 
     $scope.goToAssignment = Notification.goToAssignment;
 
-//    $interval(() => Api.getNotifications().then(Notification.set), INTERVAL_DELAY);
+    $interval(() => Api.getNotifications().then(Notification.set), INTERVAL_DELAY);
 
     let delaySearch;
     $scope.search = () => {
