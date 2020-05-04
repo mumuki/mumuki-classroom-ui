@@ -42,9 +42,14 @@ angular
     };
 
     $scope.isAdmin = Permissions.isAdmin();
+    $scope.isJanitor = Permissions.isJanitor();
 
     $scope.reportUrl = () => {
       return `${Domain.classroomApiURL()}/courses/${$stateParams.course}/report`;
+    };
+
+    $scope.guideProgressReportUrl = () => {
+      return `${Domain.classroomApiURL()}/courses/${$stateParams.course}/guide_progress_report`;
     };
 
     $scope.copy = (link) => {
