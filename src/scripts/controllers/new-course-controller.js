@@ -4,7 +4,7 @@ angular
   .controller('NewCourseController', function ($scope, $state, $filter, $stateParams, toastr, Auth, Api, Permissions) {
     const translate = $filter('translate');
 
-    $scope.isJanitor = Permissions.isJanitor;
+    $scope.isJanitor = Permissions.isJanitor();
     $scope.course = {
       days: [],
       code: '',

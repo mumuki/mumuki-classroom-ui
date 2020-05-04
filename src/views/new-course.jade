@@ -67,6 +67,6 @@
         small.text-muted.text-danger(ng-show='!isValidShifts()')
           | {{ 'new_course_shift_error' | translate }}
 
-    button.btn.btn-success.pull-right(ng-if='isJanitor()', ng-disabled='!isValid()')
+    button.btn.btn-success.pull-right(ng-if='isJanitor', ng-disabled='!isValid()')
       | {{ 'new_course' | translate }}
 

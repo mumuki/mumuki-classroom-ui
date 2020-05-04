@@ -33,6 +33,6 @@ div
     +accordionPanel('accordionComplements', '"complements"', 'headingComplements', 'collapseComplements', 'complements')
     +accordionPanel('accordionOthers', '"others"', 'headingOthers', 'collapseOthers', 'others')
 
-  button.btn.btn-success.pull-right(ng-if='isJanitor()', ui-sref='classroom.courses.new')
+  button.btn.btn-success.pull-right(ng-if='isJanitor', ui-sref='classroom.courses.new')
     | {{ 'new_course' | translate }}
 
