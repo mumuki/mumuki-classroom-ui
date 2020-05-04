@@ -10,7 +10,7 @@
   div.row
     .col-md-2
       button.btn.btn-success(ng-click='goToAddStudents()') {{ 'new_student' | translate }}
-    .col-md-7(style='margin-top: 10px')
+    .col-md-6(style='margin-top: 10px')
       a(href='', ng-click='inviteStudents()', ng-if="course.invitationExpired()") {{ 'invite_students' | translate }}
       p(ng-if="!course.invitationExpired()")
         span {{ 'invitation_link' | translate }}:
@@ -20,7 +20,7 @@
         a(href='', ng-click="copy(course.invitationLink())"): i.fa.fa-fw.fa-clipboard
         span &nbsp;
         span.mu-disabled(ng-if='isCopied') {{ 'copied' | translate }}
-    .col-md-3.pull-right.report
+    .col-md-4.pull-right.report
       div(ng-if="isAdmin")
         a(ng-click='export()')
           span.view-mode {{ 'export_solutions_button' | translate }}
@@ -29,6 +29,11 @@
       div
         a(href='{{ reportUrl() }}' download)
           span.view-mode {{ 'export_course_report' | translate }}
+          i.fa.fa-download
+
+      div(ng-if="isJanitor")
+        a(href='{{ guideProgressReportUrl() }}' download)
+          span.view-mode {{ 'export_course_report_by_guide' | translate }}
           i.fa.fa-download
 
   br

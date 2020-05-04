@@ -16,7 +16,7 @@ angular
       return _.get(notifications, course.slug, []);
     };
 
-    $scope.isJanitor = Permissions.isJanitor;
+    $scope.isJanitor = Permissions.isJanitor();
     $scope.isCourse = true;
     $scope.sortCriteria = () => ['getName()'];
 
