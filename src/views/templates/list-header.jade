@@ -55,7 +55,7 @@
           input.form-control(id='filter', placeholder='{{ currentFilter.text | translate }}', ng-model='listOptions.search', ng-change="queryChange()")
 
 
-    .row(ng-if='withStudentExport && isJanitor()')
+    .row(ng-if='withStudentExport && isJanitor')
       .col-md-3.pull-right.report
         div
           a(href='{{ reportUrl() }}' download)
