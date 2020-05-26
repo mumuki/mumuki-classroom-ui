@@ -11,6 +11,15 @@ angular
         result: null,
         uploadButtonLabel: "Seleccionar"
       };
+      $scope.response = {
+        finish: false,
+        result : {
+          processed: [],
+          processed_count: 0,
+          existing_students: [],
+          existing_students_count: 0,
+        }
+      }
     };
-    
+
   });

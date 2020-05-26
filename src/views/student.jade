@@ -24,3 +24,8 @@
       button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudents()') {{ 'confirm' | translate }}
       button.btn.btn-default.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel' | translate }}
     button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelSubmission()', ng-if='!csv.result') {{ 'cancel' | translate }}
+
+    div(ng-if="response.finish")
+      label {{ 'processed_count' | translate }}: {{ response.result.processed_count }}
+      br
+      label {{ 'errored_count' | translate }}:  {{ response.result.existing_students_count }}

@@ -45,10 +45,8 @@ angular
 
     $scope.addStudents = () => {
       return Api.addStudentsToCourse($stateParams.course, $scope.csv.result)
-        .then(() => {
-          if($scope.csv.result.length === 0)
-            $state.go('classroom.courses.course.guides', $stateParams);
-        })
+        .then((result) => $scope.response.result = result)
+        .then(() => $scope.response.finish = true)
         .catch((res) => toastr.error(res.data.message));
     };
 

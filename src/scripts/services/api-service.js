@@ -134,9 +134,11 @@ angular
     };
 
     this.addStudentsToExam = (course, exam, students_uids_batch) => {
-      return this.massiveRequest(students_uids_batch, (students_uids) => {
-        return $http.post(`${MASSIVE_API_PREFIX(course)}/exams/${exam.eid}/students`, {uids: students_uids})
-      });
+      return this
+        .massiveRequest(students_uids_batch, (students_uids) =>
+          $http.post(`${MASSIVE_API_PREFIX(course)}/exams/${exam.eid}/students`, {uids: students_uids})
+        )
+        .then(result => result.processed);
     };
 
     this.getStudents = ({ course }, params = {}) => {
@@ -237,9 +239,9 @@ angular
     };
 
     this.addStudentsToCourse = (course, students_batch) => {
-      return this.massiveRequest(students_batch, (students) => {
-        return $http.post(`${MASSIVE_API_PREFIX(course)}/students`, { students: students })
-      });
+      return this.massiveRequest(students_batch, (students) =>
+        $http.post(`${MASSIVE_API_PREFIX(course)}/students`, { students: students })
+      )
     };
 
     this.getNotifications = () => {
@@ -309,8 +311,17 @@ angular
     this.massiveRequest = (totalElements, request) => {
       const chunks = _.chunk(totalElements, MASSIVE_BATCH_LIMIT());
       const requests = chunks.map(request);
-      return $q.all(requests)
-        .then(results =>  _.flatMap(results, result => result.data.processed));
+      return $q
+        .all(requests)
+        .then(results =>  _.reduce(results, (acc, res) => {
+          acc.data = acc.data || {};
+          acc.data.processed = [..._.get(acc, 'data.processed', []), ..._.get(res, 'data.processed', [])],
+          acc.data.processed_count = _.get(acc, 'data.processed_count', 0)  + _.get(res, 'data.processed_count', 0),
+          acc.data.existing_students = [..._.get(acc, 'data.existing_students', []), ..._.get(res, 'data.existing_students', [])],
+          acc.data.existing_students_count = _.get(acc, 'data.existing_students_count', 0)  + _.get(res, 'data.existing_students_count', 0)
+          return acc;
+        }))
+        .then((res) => res.data);
     };
 
     this.downloadCsv = (filename, data) => {
