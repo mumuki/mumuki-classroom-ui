@@ -1,15 +1,11 @@
 angular
   .module('classroom')
-  .service('Api', function ($http, $location, $q, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Auth, Domain, Organization, CONFIG) {
+  .service('Api', function ($http, $q, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Domain) {
 
     const API = () => Domain.classroomApiURL();
     const BIBLIOTHECA = () => Domain.bibliothecaApiURL();
     const MASSIVE_BATCH_LIMIT = () => 100;
     const MASSIVE_API_PREFIX = (course) => `${API()}/api/courses/${course}/massive`
-
-    const authenticated = (requestOptions = {}) => _.defaultsDeep(requestOptions, {
-      headers: { Authorization: `Bearer ${Auth.token()}` }
-    });
 
     this.subdomain = Domain.tenant;
 
