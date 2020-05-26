@@ -238,6 +238,14 @@ angular
         .post(`${API()}/courses/${course}/students`, student)
     };
 
+    this.addStudentsToCourse = (course, students_batch) => {
+      const massiveAddStudentsToCourse = (students) => {
+        return $http.
+          post(`${MASSIVE_API_PREFIX(course)}/students`, { students: students })
+      };
+      return this.massiveRequest(massiveAddStudentsToCourse, students_batch);
+    };
+
     this.getNotifications = () => {
       return $http
         .get(`${API()}/notifications/unread`, { ignoreLoadingBar: true })

@@ -1,6 +1,6 @@
 angular
   .module('classroom')
-  .controller('StudentController', function ($scope, $controller, $state, $filter, $location, $stateParams, $sce, toastr, Auth, Api, Domain, Organization, Breadcrumb) {
+  .controller('StudentController', function ($scope, $controller, $state, $filter, $stateParams, $sce, toastr, Api, Organization, Breadcrumb) {
     $scope.inputType = {
       isMultiple: false
     };
@@ -44,16 +44,12 @@ angular
     }
 
     $scope.addStudents = () => {
-      _.each($scope.csv.result, (s) => {
-        return Api
-          .addStudent($stateParams.course, s)
-          .then(() => _.pullAllBy($scope.csv.result, [{'email': s.email}], 'email'))
-          .then(() => {
-            if($scope.csv.result.length === 0)
-              $state.go('classroom.courses.course.guides', $stateParams);
-          })
-          .catch((res) => toastr.error(res.data.message));
-      })
+      return Api.addStudentsToCourse($stateParams.course, $scope.csv.result)
+        .then(() => {
+          if($scope.csv.result.length === 0)
+            $state.go('classroom.courses.course.guides', $stateParams);
+        })
+        .catch((res) => toastr.error(res.data.message));
     };
 
     $scope.trust = (html) => $sce.trustAsHtml(html);
