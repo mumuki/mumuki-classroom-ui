@@ -134,11 +134,9 @@ angular
     };
 
     this.addStudentsToExam = (course, exam, students_uids_batch) => {
-      const massiveAddStudentsToExam = (students_uids) => {
-        return $http.
-          post(`${MASSIVE_API_PREFIX(course)}/exams/${exam.eid}/students`, {uids: students_uids})
-      };
-      return this.massiveRequest(massiveAddStudentsToExam, students_uids_batch);
+      return this.massiveRequest(students_uids_batch, (students_uids) => {
+        return $http.post(`${MASSIVE_API_PREFIX(course)}/exams/${exam.eid}/students`, {uids: students_uids})
+      });
     };
 
     this.getStudents = ({ course }, params = {}) => {
@@ -239,11 +237,9 @@ angular
     };
 
     this.addStudentsToCourse = (course, students_batch) => {
-      const massiveAddStudentsToCourse = (students) => {
-        return $http.
-          post(`${MASSIVE_API_PREFIX(course)}/students`, { students: students })
-      };
-      return this.massiveRequest(massiveAddStudentsToCourse, students_batch);
+      return this.massiveRequest(students_batch, (students) => {
+        return $http.post(`${MASSIVE_API_PREFIX(course)}/students`, { students: students })
+      });
     };
 
     this.getNotifications = () => {
@@ -310,7 +306,7 @@ angular
         .then((res) => this.downloadCsv('guide_report.csv', res.data));
     };
 
-    this.massiveRequest = (request, totalElements) => {
+    this.massiveRequest = (totalElements, request) => {
       const chunks = _.chunk(totalElements, MASSIVE_BATCH_LIMIT());
       const requests = chunks.map(request);
       return $q.all(requests)
