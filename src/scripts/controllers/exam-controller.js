@@ -1,14 +1,8 @@
 angular
   .module('classroom')
-  .controller('ExamController', function ($scope, $controller, $state, $stateParams, $filter, toastr, Api, Modal) {
-    $scope.inputType = {
-      isMultiple: false
-    };
+  .controller('ExamController', function ($scope, $state, $stateParams, $filter, toastr, Api, Modal) {
+
     $scope.titleKey = 'exam_enable_students';
-
-    $controller('CsvController', { $scope: $scope });
-
-    $scope.setAsPristine();
 
     const isBefore = () =>
       !!$scope.exam &&
@@ -73,7 +67,7 @@ angular
     };
 
     const PASSING_CRITERIA = [
-      { key: 'none', isValid: (value) => true },
+      { key: 'none', isValid: (_) => true },
       { key: 'passed_exercises', isValid: (value) => value && value >= 0 },
       { key: 'percentage', isValid: (value) => value && value >= 0 && value <= 100 }
     ];
@@ -104,20 +98,19 @@ angular
       return criterion;
     };
 
-    $scope.addPermissions = () => {
-      const emails = _.compact(_.map($scope.csv.result, 'email'));
-      Api.addStudentsToExam($stateParams.course, $scope.exam, emails).
-      then(processedStudents => {
-        processedStudents.forEach(student_uid => setStudentAsSelected(student_uid));
-        if(processedStudents.length === emails.length) {
-          toastr.success($filter('translate')('students_added_successfully_to_exam'));
-          $scope.setAsPristine();
-        }
-        else {
-          toastr.error($filter('translate')('students_not_added_to_exam'));
-        }
-      })
-      .catch(res => toastr.error(res.data.message));
+    $scope.addPermissions = (result) => {
+      const emails = _.compact(_.map(result, 'email'));
+      Api
+        .addStudentsToExam($stateParams.course, $scope.exam, emails)
+        .then(processedStudents => {
+          processedStudents.forEach(student_uid => setStudentAsSelected(student_uid));
+          if(processedStudents.length === emails.length) {
+            toastr.success($filter('translate')('students_added_successfully_to_exam'));
+          }
+          else {
+            toastr.error($filter('translate')('students_not_added_to_exam'));
+          }
+        });
     };
 
     const setStudentAsSelected = (email) => {

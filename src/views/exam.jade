@@ -122,50 +122,36 @@
         button.btn.btn-success.pull-right(ng-disabled='!isValid()')
           | {{ 'save' | translate }}
 
-  .col-sm-12(ng-if='!isNew', ng-switch='inputType.isMultiple')
-    .row
-      .student-switch.pull-right
-        input(bs-switch, ng-model='inputType.isMultiple', type='checkbox', switch-on-text="{{ 'bulk' | translate }}", switch-off-text="{{ 'single' | translate }}", switch-size='mini')
-      h3 {{ titleKey | translate }}
+  csv-upload(
+      massive-upload-click='addPermissions',
+      is-edit='isNew')
 
-    .row(ng-switch-when="true")
-      table.table.emails-table(ng-if='csv.result')
-        tr(ng-repeat='student in csv.result')
-          td
-            input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}')
-      div(ng-if='!csv.result')
-        h4: small(ng-bind-html='"exam_student_example_csv_link" | translate | trustHtml')
-        ng-csv-import.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
-      .row(ng-if='csv.result')
-        button.btn.btn-success.modal-form-input.pull-right(ng-click='addPermissions()') {{ 'confirm' | translate }}
-        button.btn.btn-default.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel' | translate }}
-      br
+    h3 {{ titleKey | translate }}
 
-    .single-student(ng-switch-when="false")
-      .row
-        label {{ 'students' | translate }}
-        .input-group
-          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='params.q')
-          i.input-group-addon.fa.fa-search
+    .single-student
+      label {{ 'students' | translate }}
+      .input-group
+        input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='params.q')
+        i.input-group-addon.fa.fa-search
 
       br
 
-      .row
-        small Haciendo click en #[i.fa.fa-check-square-o] se dará de alta al alumno sin la necesidad de guardar el examen.
-        .col-sm-12(ng-repeat='student in students')
-          .row.guide-progress-blog
-            .col-xs-10
-              img.rounded-x(ng-src='{{ student.image_url }}')
-              .name-location
-                strong {{ student.fullName() }}
-              .name-location
-                small(ng-if='!student.email') {{ 'email_not_provided' | translate }}
-                small(ng-if='student.email')
-                  a(href='mailto:{{ student.email }}') {{ student.email }}
-            .col-xs-2
-              label.mu-checkbox.pull-right
-                input(type='checkbox', ng-checked='student.isSelected', ng-click='toggle(student)', ng-disabled='student.isProcessing')
-                span
+      small Haciendo click en #[i.fa.fa-check-square-o] se dará de alta al alumno sin la necesidad de guardar el examen.
+      .col-sm-12(ng-repeat='student in students')
+        .row.guide-progress-blog
+          .col-xs-10
+            img.rounded-x(ng-src='{{ student.image_url }}')
+            .name-location
+              strong {{ student.fullName() }}
+            .name-location
+              small(ng-if='!student.email') {{ 'email_not_provided' | translate }}
+              small(ng-if='student.email')
+                a(href='mailto:{{ student.email }}') {{ student.email }}
+          .col-xs-2
+            label.mu-checkbox.pull-right
+              input(type='checkbox', ng-checked='student.isSelected', ng-click='toggle(student)', ng-disabled='student.isProcessing')
+              span
+
       br
 
       paginator.text-center.col-xs-12.col-sm-12.col-md-12.col-lg-12(

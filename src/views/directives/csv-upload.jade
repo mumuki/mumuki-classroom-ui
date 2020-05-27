@@ -1,0 +1,50 @@
+.student-switch.pull-right(ng-if="!isEdit")
+
+  input(
+      bs-switch,
+      ng-model='inputType.isMultiple',
+      type='checkbox',
+      switch-on-text="{{ 'bulk' | translate }}",
+      switch-off-text="{{ 'single' | translate }}",
+      switch-size='mini')
+
+.single-student(ng-if='!inputType.isMultiple')
+  ng-transclude
+
+  div(ng-if='!csv.result')
+    button.btn.btn-success.modal-form-input.pull-right(ng-click='singleUploadClick()') {{ 'confirm' | translate }}
+    button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelClick()') {{ 'cancel' | translate }}
+
+.multiple-student(ng-if='inputType.isMultiple')
+
+  h3 {{ 'add_multiple_students' | translate }}
+  h4: small(ng-bind-html='"student_example_csv_link" | translate | trustHtml')
+
+  ng-csv-import.import(
+    content='csv.content',
+    callback='applyCsv',
+    header='csv.header',
+    header-visible='csv.headerVisible',
+    separator='csv.separator',
+    result='csv.result',
+    accept='csv.accept',
+    upload-button-label='csv.uploadButtonLabel')
+
+  div(ng-if='csv.result')
+    div
+      strong {{ 'students_count_to_process' | translate }}:
+      span   {{ csv.result.length }}
+
+    button.btn.btn-success.modal-form-input.pull-right(ng-click='massiveUpload()') {{ 'confirm' | translate }}
+    button.btn.btn-default.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel'  | translate }}
+
+  div(ng-if='!csv.result')
+    button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelClick()') {{ 'cancel' | translate }}
+
+  div(ng-if="response.finish")
+    div
+      strong {{ 'processed_count' | translate }}:
+      span   {{ response.result.processed_count }}
+    div
+      strong {{ 'errored_count'   | translate }}:
+      span   {{ response.result.existing_students_count }}
