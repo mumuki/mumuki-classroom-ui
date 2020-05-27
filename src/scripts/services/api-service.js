@@ -137,8 +137,7 @@ angular
       return this
         .massiveRequest(students_uids_batch, (students_uids) =>
           $http.post(`${MASSIVE_API_PREFIX(course)}/exams/${exam.eid}/students`, {uids: students_uids})
-        )
-        .then(result => result.processed);
+        );
     };
 
     this.getStudents = ({ course }, params = {}) => {
@@ -194,7 +193,7 @@ angular
       const eid = exercise.eid;
       const language = exercise.language;
       return $http
-        .get(`${API()}/courses/${course}/guides/${org}/${repo}/${eid}/student/${student}/messages?language=#{language}`)
+        .get(`${API()}/courses/${course}/guides/${org}/${repo}/${eid}/student/${student}/messages?language=${language}`)
         .then((res) => res.data)
     };
 

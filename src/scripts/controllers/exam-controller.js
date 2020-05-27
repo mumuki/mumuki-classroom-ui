@@ -100,9 +100,10 @@ angular
 
     $scope.addPermissions = (result) => {
       const emails = _.compact(_.map(result, 'email'));
-      Api
+      return Api
         .addStudentsToExam($stateParams.course, $scope.exam, emails)
-        .then(processedStudents => {
+        .then(result => {
+          processedStudents = result.processed
           processedStudents.forEach(student_uid => setStudentAsSelected(student_uid));
           if(processedStudents.length === emails.length) {
             toastr.success($filter('translate')('students_added_successfully_to_exam'));
@@ -110,6 +111,7 @@ angular
           else {
             toastr.error($filter('translate')('students_not_added_to_exam'));
           }
+          return result;
         });
     };
 

@@ -59,12 +59,33 @@ angular
           return $scope.massiveUploadClick($scope.csv.result)
           .then((result) => $scope.response.result = result)
           .then(() => $scope.response.finish = true)
-          .then(() => $scope.setAsPristine())
           .catch((res) => toastr.error(res.data.message));
 
         }
 
         $scope.setAsPristine();
+
+        $scope.jsonToCsvString = (jsonArray = []) => {
+          if (jsonArray.length === 0) return "";
+          const header = _.chain(jsonArray).get(0, {}).keys().without('uid').value()
+          let csv = header.join($scope.csv.separator)
+          jsonArray.forEach(json => {
+            csv += `\n${header.map(field => _.get(json, field, '')).join($scope.csv.separator)}`
+          })
+          return csv;
+        }
+
+        $scope.downloadAsCSV = (filename, array) => {
+          const blob = new Blob([$scope.jsonToCsvString(array)]);
+          const a = window.document.createElement("a");
+
+          a.href = window.URL.createObjectURL(blob, { type: "text/plain" });
+          a.download = `${filename}.csv`;
+
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
 
       }
 
