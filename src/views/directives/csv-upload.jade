@@ -1,7 +1,9 @@
 .csv-upload
-  .student-switch.pull-right(ng-if="!isEdit")
+
+  .student-switch.pull-right(ng-if='!isEdit')
 
     input(
+        ng-if='!onlyMassive',
         bs-switch,
         ng-model='inputType.isMultiple',
         type='checkbox',

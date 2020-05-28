@@ -11,14 +11,16 @@ angular
         singleUploadClick: '&?',
         massiveUploadClick: '=',
         cancelClick: '&?',
+        onlyMassive: '=?',
         isEdit: '=?',
       },
-      controller: ($scope, $q) => {
+      controller: ($scope, $q, toastr) => {
 
         const rejectedPromise = () => $q((_, rej) => rej({ data: { message: 'Promise not provided' } }))
 
         $scope.singleUploadClick = $scope.singleUploadClick || rejectedPromise;
         $scope.cancelClick = $scope.cancelClick || rejectedPromise;
+        $scope.onlyMassive = $scope.onlyMassive || false;
         $scope.isEdit = $scope.isEdit || false;
 
         $scope.toggleMultiple = () => {
@@ -46,7 +48,7 @@ angular
         };
 
         $scope.inputType = {
-          isMultiple: false,
+          isMultiple: $scope.onlyMassive,
           isLoading: false,
         }
 
@@ -58,7 +60,7 @@ angular
           return $scope.massiveUploadClick($scope.csv.result)
             .then((result) => $scope.response.result = result)
             .then(() => $scope.response.finished = true)
-            .catch((res) => toastr.error(res.data.message));
+            .catch((res) => toastr.error(_.get(res, 'data.message', 'Something wrong happens')));
         }
 
         $scope.setAsPristine();
