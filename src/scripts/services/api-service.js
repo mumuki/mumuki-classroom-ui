@@ -243,6 +243,12 @@ angular
       )
     };
 
+    this.addTeachersToCourse = (course, teachers_batch) => {
+      return this.massiveRequest(teachers_batch, (teachers) =>
+        $http.post(`${MASSIVE_API_PREFIX(course)}/teachers`, { teachers: teachers })
+      )
+    };
+
     this.getNotifications = () => {
       return $http
         .get(`${API()}/notifications/unread`, { ignoreLoadingBar: true })
