@@ -36,7 +36,7 @@ angular
             accept: '.csv'
           };
           $scope.response = {
-            finish: false,
+            finished: false,
             result : {
               processed: [],
               processed_count: 0,
@@ -57,10 +57,9 @@ angular
 
         $scope.massiveUpload = () => {
           return $scope.massiveUploadClick($scope.csv.result)
-          .then((result) => $scope.response.result = result)
-          .then(() => $scope.response.finish = true)
-          .catch((res) => toastr.error(res.data.message));
-
+            .then((result) => $scope.response.result = result)
+            .then(() => $scope.response.finished = true)
+            .catch((res) => toastr.error(res.data.message));
         }
 
         $scope.setAsPristine();

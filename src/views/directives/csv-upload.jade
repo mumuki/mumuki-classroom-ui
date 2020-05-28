@@ -42,7 +42,7 @@
     div(ng-if='!csv.result')
       button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelClick()') {{ 'cancel' | translate }}
 
-    div(ng-if="response.finish")
+    div(ng-if="response.finished")
       div
         strong {{ 'processed_count' | translate }}:
         span   {{ response.result.processed_count }}
