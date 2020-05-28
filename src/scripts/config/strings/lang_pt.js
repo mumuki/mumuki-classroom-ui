@@ -65,6 +65,8 @@ angular
     example: 'Exemplo',
     exam_student_example_csv_link: 'Faça o download de um exemplo CSV clicando <a href="/assets/csv/exam/student-example.pt.csv" download="exemplo.csv" target="_blank">aqui</a>',
     student_example_csv_link: 'Faça o download de um exemplo CSV clicando <a href="/assets/csv/student/student-example.pt.csv" download="exemplo.csv" target="_blank">aqui</a>',
+    teacher_example_csv_link: 'Faça o download de um exemplo CSV clicando <a href="/assets/csv/teacher/teacher-example.pt.csv" download="exemplo.csv" target="_blank">aqui</a>',
+    course_example_csv_link: 'Faça o download de um exemplo CSV clicando <a href="/assets/csv/course/course-example.pt.csv" download="exemplo.csv" target="_blank">aqui</a>',
     example_csv_title: 'Você também pode enviar vários alunos carregando um arquivo CSV',
     exercise_status_default: 'Pendente',
     exercise_status_errored: 'Oops, sua solução não funcionou',

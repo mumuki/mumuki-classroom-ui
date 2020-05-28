@@ -1,12 +1,12 @@
 .container
 
-
-
   .input-group
     i.input-group-addon.fa.fa-search
     input.form-control(id='filter', placeholder='{{ inputPlaceholder | translate }}', ng-model='listSearch')
 
   br
+
+  button.btn.btn-default(ng-if='isAdmin', ui-sref='classroom.students.massive', style='margin-bottom: 30px') {{ 'add_students' | translate }}
 
   div.list-group
     button.list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch:searchComparator', ng-click='open(item)')

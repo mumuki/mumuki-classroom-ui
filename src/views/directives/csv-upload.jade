@@ -21,7 +21,7 @@
   .multiple-student(ng-if='inputType.isMultiple')
 
     h3 {{ 'add_multiple_students' | translate }}
-    h4: small(ng-bind-html='"student_example_csv_link" | translate | trustHtml')
+    h4: small(ng-bind-html=' exampleCsvKey | translate | trustHtml')
 
     ng-csv-import.import(
       content='csv.content',

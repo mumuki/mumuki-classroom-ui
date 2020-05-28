@@ -249,6 +249,12 @@ angular
       )
     };
 
+    this.addStudentsToMultipleCourses = (students_batch) => {
+      return this.massiveRequest(students_batch, (students) =>
+        $http.post(`${MASSIVE_API_PREFIX(course)}/course`, { students: students })
+      )
+    };
+
     this.getNotifications = () => {
       return $http
         .get(`${API()}/notifications/unread`, { ignoreLoadingBar: true })
