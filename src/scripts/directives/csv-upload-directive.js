@@ -8,17 +8,16 @@ angular
       templateUrl: 'views/directives/csv-upload.html',
       transclude: true,
       scope: {
-        singleUploadClick: '=?',
+        singleUploadClick: '&?',
         massiveUploadClick: '=',
-        cancelClick: '=?',
-        isEdit: '=',
+        cancelClick: '&?',
+        isEdit: '=?',
       },
       controller: ($scope, $q) => {
 
         const rejectedPromise = () => $q((_, rej) => rej({ data: { message: 'Promise not provided' } }))
 
         $scope.singleUploadClick = $scope.singleUploadClick || rejectedPromise;
-        $scope.massiveUploadClick = $scope.massiveUploadClick || rejectedPromise;
         $scope.cancelClick = $scope.cancelClick || rejectedPromise;
         $scope.isEdit = $scope.isEdit || false;
 
