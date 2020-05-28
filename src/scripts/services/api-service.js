@@ -6,6 +6,7 @@ angular
     const BIBLIOTHECA = () => Domain.bibliothecaApiURL();
     const MASSIVE_BATCH_LIMIT = () => 100;
     const MASSIVE_API_PREFIX = (course) => `${API()}/api/courses/${course}/massive`
+    const MASSIVE_API = `${API()}/api/massive`
 
     this.subdomain = Domain.tenant;
 
@@ -251,7 +252,7 @@ angular
 
     this.addStudentsToMultipleCourses = (students_batch) => {
       return this.massiveRequest(students_batch, (students) =>
-        $http.post(`${MASSIVE_API_PREFIX(course)}/course`, { students: students })
+        $http.post(`${MASSIVE_API}/students`, { students: students })
       )
     };
 
