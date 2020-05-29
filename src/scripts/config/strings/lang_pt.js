@@ -3,7 +3,9 @@ angular
   .module('classroom')
   .constant('LANG_PT', {
 
+    add_members: 'Adicione vários alunos ou professores',
     add_multiple_students: 'Adicione vários alunos',
+    add_multiple_teachers: 'Adicione vários professores',
     add_permissions_to_teacher: 'Adicionar permissões para',
     added_teacher: 'Professor adicionado',
     all: 'Todos',
@@ -108,6 +110,7 @@ angular
     log_in: 'Entrar',
     log_out: 'Sair',
     manual_evaluation: 'Avaliação manual',
+    massive_upload: 'Adicione vários alunos',
     mark_as_read: 'marcar como Lido',
     mark_as_unread: 'marcar como não lido',
     max_problem_submissions: 'Limite de envio para problemas',

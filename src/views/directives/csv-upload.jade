@@ -20,8 +20,8 @@
 
   .multiple-student(ng-if='inputType.isMultiple')
 
-    h3 {{ 'add_multiple_students' | translate }}
-    h4: small(ng-bind-html=' exampleCsvKey | translate | trustHtml')
+    h3 {{ massiveUploadTitleKey | translate }}
+    h4(ng-if='massiveUploadSubtitleKey'): small(ng-bind-html=' massiveUploadSubtitleKey | translate | trustHtml')
 
     ng-csv-import.import(
       content='csv.content',

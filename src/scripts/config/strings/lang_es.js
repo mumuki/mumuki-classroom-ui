@@ -3,7 +3,9 @@ angular
   .module('classroom')
   .constant('LANG_ES', {
 
+    add_members: 'Alta masiva de estudiantes o docentes',
     add_multiple_students: 'Alta masiva de estudiantes',
+    add_multiple_teachers: 'Alta masiva de docentes',
     add_permissions_to_teacher: 'Agregar permisos a',
     added_teacher: 'Docente agregado satisfactoriamente',
     all: 'Todos',
@@ -110,6 +112,7 @@ angular
     log_in_first: 'Tenés que iniciar sesión primero',
     log_out: 'Cerrar sesión',
     manual_evaluation: 'Correción manual',
+    massive_upload: 'Alta masiva',
     mark_as_read: 'Marcar como leído',
     mark_as_unread: 'Marcar como no leído',
     max_problem_submissions: 'Límite de envíos para problemas',

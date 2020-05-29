@@ -2,7 +2,9 @@ angular
   .module('classroom')
   .constant('LANG_EN', {
 
+    add_members: 'Add multiple students or teachers',
     add_multiple_students: 'Add multiple students',
+    add_multiple_teachers: 'Add multiple teachers',
     add_permissions_to_teacher: 'Add permissions to',
     added_teacher: 'Teacher added',
     all: 'All',
@@ -108,6 +110,7 @@ angular
     log_in: 'Log in',
     log_out: 'Log out',
     manual_evaluation: 'Manual evaluation',
+    massive_upload: 'massive upload',
     mark_as_read: 'Mark as read',
     mark_as_unread: 'Mark as unread',
     max_problem_submissions: 'Max problem submissions',

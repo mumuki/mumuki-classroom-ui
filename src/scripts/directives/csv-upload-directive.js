@@ -8,9 +8,13 @@ angular
       templateUrl: 'views/directives/csv-upload.html',
       transclude: true,
       scope: {
-        singleUploadClick: '&?',
         massiveUploadClick: '=',
+        massiveUploadTitleKey: '@?',
+        massiveUploadSubtitleKey: '@?',
+
+        singleUploadClick: '&?',
         cancelClick: '&?',
+
         onlyMassive: '=?',
         isEdit: '=?',
       },
@@ -20,8 +24,11 @@ angular
 
         $scope.singleUploadClick = $scope.singleUploadClick || rejectedPromise;
         $scope.cancelClick = $scope.cancelClick || rejectedPromise;
+
         $scope.onlyMassive = $scope.onlyMassive || false;
         $scope.isEdit = $scope.isEdit || false;
+
+        $scope.massiveUploadTitleKey = $scope.massiveUploadTitleKey ||  'massive_upload',
 
         $scope.toggleMultiple = () => {
           $scope.inputType.isMultiple = !$scope.inputType.isMultiple;

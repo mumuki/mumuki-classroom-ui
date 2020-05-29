@@ -6,8 +6,6 @@
 
   br
 
-  button.btn.btn-default(ng-if='isAdmin', ui-sref='classroom.students.massive', style='margin-bottom: 30px') {{ 'add_students' | translate }}
-
   div.list-group
     button.list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch:searchComparator', ng-click='open(item)')
       i(class='{{ item.iconClass() }}')
@@ -24,3 +22,6 @@
 
   button.btn.btn-success.pull-right(ng-if='isJanitor', ui-sref='classroom.courses.new')
     | {{ 'new_course' | translate }}
+
+  button.btn.btn-default.pull-right(ng-if='isAdmin', ui-sref='classroom.students.massive', style='margin-right: 30px')
+    | {{ 'add_members' | translate }}
