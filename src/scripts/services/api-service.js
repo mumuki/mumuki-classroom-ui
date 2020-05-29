@@ -6,7 +6,6 @@ angular
     const BIBLIOTHECA = () => Domain.bibliothecaApiURL();
     const MASSIVE_BATCH_LIMIT = () => 100;
     const MASSIVE_API_PREFIX = (course) => `${API()}/api/courses/${course}/massive`
-    const MASSIVE_API = `${API()}/api/massive`
 
     this.subdomain = Domain.tenant;
 
@@ -250,12 +249,6 @@ angular
       )
     };
 
-    this.addStudentsToMultipleCourses = (students_batch) => {
-      return this.massiveRequest(students_batch, (students) =>
-        $http.post(`${MASSIVE_API}/students`, { students: students })
-      )
-    };
-
     this.getNotifications = () => {
       return $http
         .get(`${API()}/notifications/unread`, { ignoreLoadingBar: true })
@@ -326,15 +319,17 @@ angular
       return $q
         .all(requests)
         .then(results =>  _.reduce(results, (acc, res) => {
-          acc.data = acc.data || {};
-          acc.data.processed = [..._.get(acc, 'data.processed', []), ..._.get(res, 'data.processed', [])],
-          acc.data.processed_count = _.get(acc, 'data.processed_count', 0)  + _.get(res, 'data.processed_count', 0),
-          acc.data.existing_students = [..._.get(acc, 'data.existing_students', []), ..._.get(res, 'data.existing_students', [])],
-          acc.data.existing_students_count = _.get(acc, 'data.existing_students_count', 0)  + _.get(res, 'data.existing_students_count', 0)
+          acc.data = reduceMultipleResponse(acc.data, res.data);
           return acc;
         }))
         .then((res) => res.data);
     };
+
+    this.multipleRequests = (requestsPromises) => {
+      return $q
+        .all(requestsPromises)
+        .then((responses) => responses.reduce(reduceMultipleResponse))
+    }
 
     this.downloadCsv = (filename, data) => {
       var link = document.createElement("a");
@@ -345,4 +340,13 @@ angular
       link.click();
       document.body.removeChild(link);
     }
+
+    function reduceMultipleResponse(acc = {}, res = {}) {
+      acc.processed = [..._.get(acc, 'processed', []), ..._.get(res, 'processed', [])],
+      acc.processed_count = _.get(acc, 'processed_count', 0)  + _.get(res, 'processed_count', 0),
+      acc.existing_students = [..._.get(acc, 'existing_students', []), ..._.get(res, 'existing_students', [])],
+      acc.existing_students_count = _.get(acc, 'existing_students_count', 0)  + _.get(res, 'existing_students_count', 0)
+      return acc;
+    }
+
   });
