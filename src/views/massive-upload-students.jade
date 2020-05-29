@@ -1,4 +1,14 @@
 
+.student-switch.pull-right
+
+    input(
+        bs-switch,
+        ng-model='input.isTeachersUpload',
+        type='checkbox',
+        switch-on-text="{{ 'teachers' | translate }}",
+        switch-off-text="{{ 'students' | translate }}",
+        switch-size='mini')
+
 csv-upload(
     massive-upload-click='upload',
     example-csv-key='course_example_csv_link',

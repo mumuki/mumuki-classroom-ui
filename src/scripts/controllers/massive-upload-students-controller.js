@@ -1,6 +1,10 @@
 angular
   .module('classroom')
-  .controller('MassiveUploadStudentsController', function ($scope, $state, $stateParams, $toastr, Api) {
+  .controller('MassiveUploadStudentsController', function ($scope, $state, $stateParams, toastr, Api) {
+
+    $scope.input = {
+      isTeachersUpload: false
+    }
 
     $scope.upload = (result) => {
       const requestsPromises = _.chain(result)
@@ -12,9 +16,13 @@ angular
 
     $scope.cancel = () => $state.go('classroom.courses', $stateParams);
 
-    function toMultipleRequests(students, course) {
-      return Api.addStudentsToCourse(course, students.map(st => _.omit(st, 'course')))
-                .catch($toastr.error(`Course ${course} does not exists`))
+    function toMultipleRequests(members, course) {
+      const membersToPost = members.map(st => _.omit(st, 'course'));
+      const request = $scope.input.isTeachersUpload
+                        ? Api.addTeachersToCourse(course, membersToPost)
+                        : Api.addStudentsToCourse(course, membersToPost)
+
+      return request.catch((err) => toastr.error(err));
     }
 
   });
