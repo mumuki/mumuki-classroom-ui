@@ -344,8 +344,8 @@ angular
     function reduceMultipleResponse(acc = {}, res = {}) {
       acc.processed = [..._.get(acc, 'processed', []), ..._.get(res, 'processed', [])],
       acc.processed_count = _.get(acc, 'processed_count', 0)  + _.get(res, 'processed_count', 0),
-      acc.existing_students = [..._.get(acc, 'existing_students', []), ..._.get(res, 'existing_students', [])],
-      acc.existing_students_count = _.get(acc, 'existing_students_count', 0)  + _.get(res, 'existing_students_count', 0)
+      acc.existing_members = [..._.get(acc, 'existing_members', []), ..._.get(res, 'existing_members', [])],
+      acc.existing_members_count = _.get(acc, 'existing_members_count', 0)  + _.get(res, 'existing_members_count', 0)
       return acc;
     }
 

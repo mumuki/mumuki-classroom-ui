@@ -48,8 +48,8 @@ angular
             result : {
               processed: [],
               processed_count: 0,
-              existing_students: [],
-              existing_students_count: 0,
+              existing_members: [],
+              existing_members_count: 0,
             }
           }
         };

@@ -51,5 +51,5 @@
         button.btn.btn-link(ng-click="downloadAsCSV('processed', response.result.processed)") {{ 'download_cvs' | translate }}
       div
         strong {{ 'errored_count'   | translate }}:
-        span   {{ response.result.existing_students_count }}
-        button.btn.btn-link(ng-click="downloadAsCSV('unprocessed', response.result.existing_students)") {{ 'download_cvs' | translate }}
+        span   {{ response.result.existing_members_count }}
+        button.btn.btn-link(ng-click="downloadAsCSV('unprocessed', response.result.existing_members)") {{ 'download_cvs' | translate }}
