@@ -34,7 +34,7 @@ angular
           $scope.inputType.isMultiple = !$scope.inputType.isMultiple;
         }
 
-        $scope.setAsPristine = () => {
+        $scope.setCsvAsPristine = () => {
           $scope.csv = {
             content: null,
             header: true,
@@ -43,6 +43,10 @@ angular
             result: null,
             accept: '.csv'
           };
+        };
+
+        $scope.setAsPristine = () => {
+          $scope.setCsvAsPristine();
           $scope.response = {
             finished: false,
             result : {
@@ -67,8 +71,9 @@ angular
           return $scope.massiveUploadClick($scope.csv.result)
             .then((result) => $scope.response.result = result)
             .then(() => $scope.response.finished = true)
-            .catch((res) => toastr.error(_.get(res, 'data.message', 'Something wrong happens')));
-        }
+            .catch((res) => toastr.error(_.get(res, 'data.message', 'Something wrong happens')))
+            .finally(() => $scope.setCsvAsPristine());
+        };
 
         $scope.setAsPristine();
 

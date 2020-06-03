@@ -35,7 +35,7 @@
 
     div(ng-if='csv.result')
       div
-        strong {{ 'students_count_to_process' | translate }}:
+        strong {{ 'members_count_to_process' | translate }}:
         span   {{ csv.result.length }}
 
       button.btn.btn-success.modal-form-input.pull-right(ng-click='massiveUpload()') {{ 'confirm' | translate }}
