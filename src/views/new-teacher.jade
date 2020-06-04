@@ -1,10 +1,17 @@
-.container
+csv-upload(
+    massive-upload-click='addTeachers',
+    massive-upload-title-key='add_multiple_teachers',
+    massive-upload-subtitle-key='teacher_example_csv_link',
+    single-upload-click='addTeacher()',
+    cancel-click='cancel()')
+
   h3 {{ 'new_teacher' | translate }}
+
   fieldset.form-group
-    input.form-control(ng-model='teacher.first_name', type='text', placeholder='First name', autofocus)
+    input.form-control(ng-model='teacher.first_name', type='text', placeholder='{{ "first_name" | translate }}', autofocus)
+
   fieldset.form-group
-    input.form-control(ng-model='teacher.last_name', type='text', placeholder='Last name')
+    input.form-control(ng-model='teacher.last_name', type='text', placeholder='{{ "last_name" | translate }}')
+
   fieldset.form-group
-    input.form-control(ng-model='teacher.email', type='text', placeholder='example@mumuki.org')
-  .row
-    button.btn.btn-success.modal-form-input.pull-right(ng-click='addTeacher()') {{ 'confirm' | translate }}
+    input.form-control(ng-model='teacher.email', type='text', placeholder='{{ "email" | translate }}')

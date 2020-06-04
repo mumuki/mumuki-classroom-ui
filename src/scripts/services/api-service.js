@@ -1,15 +1,11 @@
 angular
   .module('classroom')
-  .service('Api', function ($http, $location, $q, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Auth, Domain, Organization, CONFIG) {
+  .service('Api', function ($http, $q, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Domain) {
 
     const API = () => Domain.classroomApiURL();
     const BIBLIOTHECA = () => Domain.bibliothecaApiURL();
     const MASSIVE_BATCH_LIMIT = () => 100;
     const MASSIVE_API_PREFIX = (course) => `${API()}/api/courses/${course}/massive`
-
-    const authenticated = (requestOptions = {}) => _.defaultsDeep(requestOptions, {
-      headers: { Authorization: `Bearer ${Auth.token()}` }
-    });
 
     this.subdomain = Domain.tenant;
 
@@ -138,11 +134,10 @@ angular
     };
 
     this.addStudentsToExam = (course, exam, students_uids_batch) => {
-      const massiveAddStudentsToExam = (students_uids) => {
-        return $http.
-          post(`${MASSIVE_API_PREFIX(course)}/exams/${exam.eid}/students`, {uids: students_uids})
-      };
-      return this.massiveRequest(massiveAddStudentsToExam, students_uids_batch);
+      return this
+        .massiveRequest(students_uids_batch, (students_uids) =>
+          $http.post(`${MASSIVE_API_PREFIX(course)}/exams/${exam.eid}/students`, {uids: students_uids})
+        );
     };
 
     this.getStudents = ({ course }, params = {}) => {
@@ -198,7 +193,7 @@ angular
       const eid = exercise.eid;
       const language = exercise.language;
       return $http
-        .get(`${API()}/courses/${course}/guides/${org}/${repo}/${eid}/student/${student}/messages?language=#{language}`)
+        .get(`${API()}/courses/${course}/guides/${org}/${repo}/${eid}/student/${student}/messages?language=${language}`)
         .then((res) => res.data)
     };
 
@@ -240,6 +235,18 @@ angular
     this.addStudent = (course, student) => {
       return $http
         .post(`${API()}/courses/${course}/students`, student)
+    };
+
+    this.addStudentsToCourse = (course, students_batch) => {
+      return this.massiveRequest(students_batch, (students) =>
+        $http.post(`${MASSIVE_API_PREFIX(course)}/students`, { students: students })
+      )
+    };
+
+    this.addTeachersToCourse = (course, teachers_batch) => {
+      return this.massiveRequest(teachers_batch, (teachers) =>
+        $http.post(`${MASSIVE_API_PREFIX(course)}/teachers`, { teachers: teachers })
+      )
     };
 
     this.getNotifications = () => {
@@ -306,12 +313,23 @@ angular
         .then((res) => this.downloadCsv('guide_report.csv', res.data));
     };
 
-    this.massiveRequest = (request, totalElements) => {
+    this.massiveRequest = (totalElements, request) => {
       const chunks = _.chunk(totalElements, MASSIVE_BATCH_LIMIT());
       const requests = chunks.map(request);
-      return $q.all(requests)
-        .then(results =>  _.flatMap(results, result => result.data.processed));
+      return $q
+        .all(requests)
+        .then(results =>  _.reduce(results, (acc, res) => {
+          acc.data = reduceMultipleResponse(acc.data, res.data);
+          return acc;
+        }))
+        .then((res) => res.data);
     };
+
+    this.multipleRequests = (requestsPromises) => {
+      return $q
+        .all(requestsPromises)
+        .then((responses) => responses.reduce(reduceMultipleResponse))
+    }
 
     this.downloadCsv = (filename, data) => {
       var link = document.createElement("a");
@@ -322,4 +340,13 @@ angular
       link.click();
       document.body.removeChild(link);
     }
+
+    function reduceMultipleResponse(acc = {}, res = {}) {
+      acc.processed = [..._.get(acc, 'processed', []), ..._.get(res, 'processed', [])],
+      acc.processed_count = _.get(acc, 'processed_count', 0)  + _.get(res, 'processed_count', 0),
+      acc.existing_members = [..._.get(acc, 'existing_members', []), ..._.get(res, 'existing_members', [])],
+      acc.existing_members_count = _.get(acc, 'existing_members_count', 0)  + _.get(res, 'existing_members_count', 0)
+      return acc;
+    }
+
   });

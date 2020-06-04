@@ -1,15 +1,7 @@
 angular
   .module('classroom')
-  .controller('StudentController', function ($scope, $controller, $state, $filter, $location, $stateParams, $sce, toastr, Auth, Api, Domain, Organization, Breadcrumb) {
-    $scope.inputType = {
-      isMultiple: false
-    };
+  .controller('StudentController', function ($scope, $state, $stateParams, toastr, Api, Breadcrumb) {
 
-    $controller('CsvController', { $scope: $scope });
-
-    $scope.setAsPristine();
-
-    const $translate = $filter('translate');
     const EMAIL_REGEX = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
 
     Breadcrumb.setCourse($stateParams.course);
@@ -24,8 +16,6 @@ angular
     $scope.isEmailValid = (text) => {
       return $scope.isTextValid(text) && EMAIL_REGEX.test(text);
     };
-
-    $scope.toggleMultiple = () => $scope.inputType.isMultiple = !$scope.inputType.isMultiple;
 
     $scope.isValid = () =>
       $scope.isTextValid($scope.student.first_name) &&
@@ -43,20 +33,8 @@ angular
       $state.go('classroom.courses.course.students', $stateParams)
     }
 
-    $scope.addStudents = () => {
-      _.each($scope.csv.result, (s) => {
-        return Api
-          .addStudent($stateParams.course, s)
-          .then(() => _.pullAllBy($scope.csv.result, [{'email': s.email}], 'email'))
-          .then(() => {
-            if($scope.csv.result.length === 0)
-              $state.go('classroom.courses.course.guides', $stateParams);
-          })
-          .catch((res) => toastr.error(res.data.message));
-      })
+    $scope.addStudents = (result) => {
+      return Api.addStudentsToCourse($stateParams.course, result)
     };
-
-    $scope.trust = (html) => $sce.trustAsHtml(html);
-    $scope.termAndConditions = $scope.trust($translate('term_and_conditions', { url: Organization.tosUrl() }));
 
   });

@@ -1,39 +1,22 @@
-.container
-  .student-switch.pull-right(ng-if="!isEdit")
-    input(bs-switch, ng-model='inputType.isMultiple', type='checkbox', switch-on-text="{{ 'bulk' | translate }}", switch-off-text="{{ 'single' | translate }}", switch-size='mini')
-  .single-student(ng-if='!inputType.isMultiple')
-    h3 {{ titleKey | translate }}
-    fieldset.form-group
-      input.form-control(ng-model='student.first_name', type='text', placeholder='{{ "first_name" | translate }}', autofocus)
-    fieldset.form-group
-      input.form-control(ng-model='student.last_name', type='text', placeholder='{{ "last_name" | translate }}')
-    fieldset.form-group
-      input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}', ng-disabled="isEdit")
-    fieldset.form-group
-      input.form-control(ng-model='student.personal_id', type='text', placeholder='{{ "personal_id_placeholder" | translate }}')
-    .row
-      button.btn.btn-success.modal-form-input.pull-right(ng-click='submitStudent()') {{ 'confirm' | translate }}
-      button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelSubmission()') {{ 'cancel' | translate }}
-  .multiple-student(ng-if='inputType.isMultiple')
-    h3 {{ 'add_multiple_students' | translate }}
-    h4: small(ng-bind-html='"student_example_csv_link" | translate | trustHtml')
-    ng-csv-import.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
-    table.table(ng-if='csv.result')
-      tr
-        th {{ 'first_name' | translate}}
-        th {{ 'last_name' | translate}}
-        th {{ 'email' | translate }}
-        th {{ 'personal_id' | translate }}
-      tr(ng-repeat='student in csv.result')
-        td
-          input.form-control(ng-model='student.first_name', type='text', placeholder='{{ "first_name" | translate }}', autofocus)
-        td
-          input.form-control(ng-model='student.last_name', type='text', placeholder='{{ "last_name" | translate }}')
-        td
-          input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}')
-        td
-          input.form-control(ng-model='student.personal_id', type='text', placeholder='{{ "personal_id_placeholder" | translate }}')
-    .row(ng-if='csv.result')
-      button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudents()') {{ 'confirm' | translate }}
-      button.btn.btn-default.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel' | translate }}
-    button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelSubmission()', ng-if='!csv.result') {{ 'cancel' | translate }}
+
+csv-upload(
+    massive-upload-click='addStudents',
+    massive-upload-title-key='add_multiple_students',
+    massive-upload-subtitle-key='student_example_csv_link',
+    single-upload-click='submitStudent()',
+    cancel-click='cancelSubmission()',
+    is-edit='isEdit')
+
+  h3 {{ titleKey | translate }}
+
+  fieldset.form-group
+    input.form-control(ng-model='student.first_name', type='text', placeholder='{{ "first_name" | translate }}', autofocus)
+
+  fieldset.form-group
+    input.form-control(ng-model='student.last_name', type='text', placeholder='{{ "last_name" | translate }}')
+
+  fieldset.form-group
+    input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}', ng-disabled="isEdit")
+
+  fieldset.form-group
+    input.form-control(ng-model='student.personal_id', type='text', placeholder='{{ "personal_id_placeholder" | translate }}')

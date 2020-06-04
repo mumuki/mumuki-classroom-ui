@@ -1,7 +1,5 @@
 .container
 
-
-
   .input-group
     i.input-group-addon.fa.fa-search
     input.form-control(id='filter', placeholder='{{ inputPlaceholder | translate }}', ng-model='listSearch')
@@ -24,3 +22,6 @@
 
   button.btn.btn-success.pull-right(ng-if='isJanitor', ui-sref='classroom.courses.new')
     | {{ 'new_course' | translate }}
+
+  button.btn.btn-default.pull-right(ng-if='isAdmin', ui-sref='classroom.students.massive', style='margin-right: 30px')
+    | {{ 'add_members' | translate }}

@@ -3,7 +3,9 @@ angular
   .module('classroom')
   .constant('LANG_PT', {
 
+    add_members: 'Adicione vários alunos ou professores',
     add_multiple_students: 'Adicione vários alunos',
+    add_multiple_teachers: 'Adicione vários professores',
     add_permissions_to_teacher: 'Adicionar permissões para',
     added_teacher: 'Professor adicionado',
     all: 'Todos',
@@ -65,6 +67,8 @@ angular
     example: 'Exemplo',
     exam_student_example_csv_link: 'Faça o download de um exemplo CSV clicando <a href="/assets/csv/exam/student-example.pt.csv" download="exemplo.csv" target="_blank">aqui</a>',
     student_example_csv_link: 'Faça o download de um exemplo CSV clicando <a href="/assets/csv/student/student-example.pt.csv" download="exemplo.csv" target="_blank">aqui</a>',
+    teacher_example_csv_link: 'Faça o download de um exemplo CSV clicando <a href="/assets/csv/teacher/teacher-example.pt.csv" download="exemplo.csv" target="_blank">aqui</a>',
+    course_example_csv_link: 'Faça o download de um exemplo CSV clicando <a href="/assets/csv/course/course-example.pt.csv" download="exemplo.csv" target="_blank">aqui</a>',
     example_csv_title: 'Você também pode enviar vários alunos carregando um arquivo CSV',
     exercise_status_default: 'Pendente',
     exercise_status_errored: 'Oops, sua solução não funcionou',
@@ -106,6 +110,7 @@ angular
     log_in: 'Entrar',
     log_out: 'Sair',
     manual_evaluation: 'Avaliação manual',
+    massive_upload: 'Adicione vários alunos',
     mark_as_read: 'marcar como Lido',
     mark_as_unread: 'marcar como não lido',
     max_problem_submissions: 'Limite de envio para problemas',

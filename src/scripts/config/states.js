@@ -93,6 +93,16 @@ angular
         }
 
       })
+      .state('classroom.students.massive', {
+        url: '/students/massive',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/massive-upload-students.html',
+            controller: 'MassiveUploadStudentsController'
+          }
+        }
+      })
       .state('classroom.students.new', {
         url: '/students/:course',
         authenticated: true,

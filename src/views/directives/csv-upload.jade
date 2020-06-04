@@ -1,0 +1,55 @@
+.csv-upload
+
+  .student-switch.pull-right(ng-if='!isEdit')
+
+    input(
+        ng-if='!onlyMassive',
+        bs-switch,
+        ng-model='inputType.isMultiple',
+        type='checkbox',
+        switch-on-text="{{ 'bulk' | translate }}",
+        switch-off-text="{{ 'single' | translate }}",
+        switch-size='mini')
+
+  .single-student(ng-if='!inputType.isMultiple')
+    ng-transclude
+
+    div(ng-if='!csv.result')
+      button.btn.btn-success.modal-form-input.pull-right(ng-click='singleUploadClick()') {{ 'confirm' | translate }}
+      button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelClick()') {{ 'cancel' | translate }}
+
+  .multiple-student(ng-if='inputType.isMultiple')
+
+    h3 {{ massiveUploadTitleKey | translate }}
+    h4(ng-if='massiveUploadSubtitleKey'): small(ng-bind-html=' massiveUploadSubtitleKey | translate | trustHtml')
+
+    ng-csv-import.import(
+      content='csv.content',
+      callback='applyCsv',
+      header='csv.header',
+      header-visible='csv.headerVisible',
+      separator='csv.separator',
+      result='csv.result',
+      accept='csv.accept',
+      upload-button-label='csv.uploadButtonLabel')
+
+    div(ng-if='csv.result')
+      div
+        strong {{ 'members_count_to_process' | translate }}:
+        span   {{ csv.result.length }}
+
+      button.btn.btn-success.modal-form-input.pull-right(ng-click='massiveUpload()') {{ 'confirm' | translate }}
+      button.btn.btn-default.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel'  | translate }}
+
+    div(ng-if='!csv.result')
+      button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelClick()') {{ 'cancel' | translate }}
+
+    div(ng-if="response.finished")
+      div
+        strong {{ 'processed_count' | translate }}:
+        span   {{ response.result.processed_count }}
+        button.btn.btn-link(ng-click="downloadAsCSV('processed', response.result.processed)") {{ 'download_cvs' | translate }}
+      div
+        strong {{ 'errored_count'   | translate }}:
+        span   {{ response.result.existing_members_count }}
+        button.btn.btn-link(ng-click="downloadAsCSV('unprocessed', response.result.existing_members)") {{ 'download_cvs' | translate }}
