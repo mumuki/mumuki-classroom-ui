@@ -76,6 +76,8 @@ angular
 
     $scope.$watch('passing_criterion', () => {
       $scope.exam.passing_criterion = $scope.toExamCriterion($scope.passing_criterion);
+      $scope.exam.passing_criterion_type = $scope.exam.passing_criterion.type;
+      $scope.exam.passing_criterion_value = $scope.exam.passing_criterion.value;
     }, true);
 
     $scope.isNone = (type) => type === 'none';
