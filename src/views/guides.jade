@@ -17,7 +17,6 @@ mixin accordionPanel(parentId, type, headingId, dataTarget, items)
             label(ng-if='!(' + items + ' | orderBy: sortCriteria() | filter:listSearch:searchComparator).length')
               | {{ noItemsToShow | translate }}
 
-
 div
 
   .input-group
@@ -27,12 +26,10 @@ div
   br
 
   div.list-group
-    .list-group.no-margin-bottom(ng-repeat='(chapter, guides) in chaptersAndLessons')
-      +accordionPanel('accordionChapters', 'chapter', 'heading{{$index}}', 'collapse{{$index}}', 'guides')
+    .list-group.no-margin-bottom(ng-repeat='chapter in chapters')
+      +accordionPanel('accordionChapters', 'chapter.getName()', 'heading{{$index}}', 'collapse{{$index}}', 'chapter.lessons')
     +accordionPanel('accordionExams', '"exams"', 'headingExams', 'collapseExams', 'exams')
     +accordionPanel('accordionComplements', '"complements"', 'headingComplements', 'collapseComplements', 'complements')
-    +accordionPanel('accordionOthers', '"others"', 'headingOthers', 'collapseOthers', 'others')
 
   button.btn.btn-success.pull-right(ng-if='isJanitor', ui-sref='classroom.courses.new')
     | {{ 'new_course' | translate }}
-
