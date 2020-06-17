@@ -125,3 +125,9 @@ input.form-control[disable="disable"] {
 i.mu-emoji {
   font-size: 1em;
 }
+
+.mu-button-disabled {
+  color: $mu-color-disabled !important;
+  background-color: lighten($mu-color-disabled, 30%) !important;
+  pointer-events: none;
+}
