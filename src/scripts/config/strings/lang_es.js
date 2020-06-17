@@ -199,6 +199,7 @@ angular
     unified: 'Unificado',
     upload_file: 'Subir archivo',
     uploading_file: 'Subiendo archivo',
+    unprocessed_count: "Cantidad de altas no procesadas",
     view_in_atheneum: 'Ver en Atheneum',
     view_mode: 'Visualización: ',
     with_warnings: 'Con advertencias',
