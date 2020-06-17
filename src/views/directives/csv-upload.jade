@@ -14,9 +14,13 @@
   .single-student(ng-if='!inputType.isMultiple')
     ng-transclude
 
+    br
+
     div(ng-if='!csv.result')
       button.btn.btn-success.modal-form-input.pull-right(ng-click='singleUploadClick()') {{ 'confirm' | translate }}
       button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelClick()') {{ 'cancel' | translate }}
+
+    br
 
   .multiple-student(ng-if='inputType.isMultiple')
 
@@ -32,6 +36,7 @@
       result='csv.result',
       accept='csv.accept',
       upload-button-label='csv.uploadButtonLabel')
+
 
     div(ng-if='csv.result')
       div
