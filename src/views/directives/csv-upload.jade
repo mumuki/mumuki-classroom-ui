@@ -48,8 +48,18 @@
       div
         strong {{ 'processed_count' | translate }}:
         span   {{ response.result.processed_count }}
-        button.btn.btn-link(ng-click="downloadAsCSV('processed', response.result.processed)") {{ 'download_cvs' | translate }}
+        button.btn.btn-link(ng-click="downloadAsCSV('processed', response.result.processed)")
+          span {{ 'download_cvs' | translate }}
+          i.fa.fa-fw.fa-download
+      div
+        strong {{ 'unprocessed_count' | translate }}:
+        span   {{ response.result.unprocessed_count }}
+        button.btn.btn-link(ng-click="downloadAsCSV('unprocessed', response.result.unprocessed)")
+          span {{ 'download_cvs' | translate }}
+          i.fa.fa-fw.fa-download
       div
         strong {{ 'errored_count'   | translate }}:
-        span   {{ response.result.existing_members_count }}
-        button.btn.btn-link(ng-click="downloadAsCSV('unprocessed', response.result.existing_members)") {{ 'download_cvs' | translate }}
+        span   {{ response.result.errored_members_count }}
+        button.btn.btn-link(ng-click="downloadAsCSV('errored_members', response.result.errored_members)")
+          span {{ 'download_cvs' | translate }}
+          i.fa.fa-fw.fa-download

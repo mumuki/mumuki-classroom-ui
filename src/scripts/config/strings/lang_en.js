@@ -196,6 +196,7 @@ angular
     unified: 'Unified',
     upload_file: 'Upload file',
     uploading_file: 'Uploading file',
+    unprocessed_count: 'Unprocessed massive creation count',
     view_in_atheneum: 'View in Atheneum',
     view_mode: 'View Mode: ',
     with_warnings: 'With warnings',
