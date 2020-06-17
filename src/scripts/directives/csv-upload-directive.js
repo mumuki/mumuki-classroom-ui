@@ -37,6 +37,7 @@ angular
         }
 
         $scope.setCsvAsPristine = () => {
+          angular.element('input[type="file"]').val(null)
           $scope.csv = {
             content: null,
             header: true,

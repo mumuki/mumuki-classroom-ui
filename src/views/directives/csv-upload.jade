@@ -20,6 +20,8 @@
       button.btn.btn-success.modal-form-input.pull-right(ng-click='singleUploadClick()') {{ 'confirm' | translate }}
       button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelClick()') {{ 'cancel' | translate }}
 
+    br
+
   .multiple-student(ng-if='inputType.isMultiple')
 
     h3 {{ massiveUploadTitleKey | translate }}
@@ -34,6 +36,7 @@
       result='csv.result',
       accept='csv.accept',
       upload-button-label='csv.uploadButtonLabel')
+
 
     div(ng-if='csv.result')
       div
