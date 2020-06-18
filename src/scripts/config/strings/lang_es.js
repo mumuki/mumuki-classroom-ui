@@ -58,7 +58,7 @@ angular
     email_not_provided: 'No hay email asociado',
     empty_notifications: 'No hay notificaciones para mostrar',
     end_time: 'Hasta',
-    errored_count: "Cantidad de altas incorrectas",
+    errored_members_count: "Cantidad de altas incorrectas",
     evaluate: 'Corregir',
     exam: 'Examen',
     exam_enable_students: 'Habilitar estudiantes',

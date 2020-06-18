@@ -68,7 +68,7 @@ angular
     student_example_csv_link: 'Download an example CSV by clicking <a href="/assets/csv/student/student-example.en.csv" download="example.csv" target="_blank">here</a>',
     teacher_example_csv_link: 'Download an example CSV by clicking <a href="/assets/csv/teacher/teacher-example.en.csv" download="example.csv" target="_blank">here</a>',
     course_example_csv_link: 'Download an example CSV by clicking <a href="/assets/csv/course/course-example.en.csv" download="example.csv" target="_blank">here</a>',
-    errored_count: "Errored massive creation count",
+    errored_members_count: "Errored massive creation count",
     example_csv_title: 'You can also upload multiple students by uploading a CSV file',
     exercise_status_default: 'Pending',
     exercise_status_errored: 'Oops, your solution didn\'t work',
