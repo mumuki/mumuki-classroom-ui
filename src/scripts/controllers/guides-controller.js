@@ -7,7 +7,6 @@ angular
     $scope.setLastChapterOpened = (chapter) => { $scope.lastChapter = { name: chapter }};
 
     Breadcrumb.setCourse($stateParams.course);
-
     $scope.actualChapter = (name) => name === $scope.lastChapter.name;
 
     $scope.exams = guides.exams.map((it) => Guide.from(it.guide));
@@ -33,5 +32,14 @@ angular
     $scope.notifications = (lesson) => {
       return _.get(notifications, lesson.slug, []);
     }
+
+    const count  = _.chain($scope.chapters)
+                    .flatMap('lessons')
+                    .concat($scope.complements.length)
+                    .concat($scope.exams.length)
+                    .size()
+                    .value();
+
+    $scope.setCount(count);
 
   });
