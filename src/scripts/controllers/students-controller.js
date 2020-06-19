@@ -36,15 +36,13 @@ angular
 
     $scope.follow = (uid) => {
       return Api.follow(uid, $scope.course())
-        .then(() => Followers.addFollower($scope.courseSlug(), uid))
-        .then(() => toastr.success($filter('translate')('do_follow')))
+        .then(() => $state.reload())
         .catch((e) => toastr.error(e));
     };
 
     $scope.unfollow = (uid) => {
       return Api.unfollow(uid, $scope.course())
-        .then(() => Followers.removeFollower($scope.courseSlug(), uid))
-        .then(() => toastr.success($filter('translate')('unfollowing')))
+        .then(() => $state.reload())
         .catch((e) => toastr.error(e));
     };
 

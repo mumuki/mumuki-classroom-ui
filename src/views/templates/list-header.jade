@@ -61,6 +61,7 @@
             span.view-mode {{ 'export_students' | translate }}
             i.fa.fa-download
           a#downloadAnchor(style='display:none')
+
   .panel-content
     div.col-md-4.col-sm-6.floating-card(ng-repeat='item in list')
       div(ng-include='itemTemplate')

@@ -1,20 +1,17 @@
 .student-floating-card
   .student-card
 
+    i.is-following.fa.fa-fw.pointer(
+        ng-click='followAction(item.uid)',
+        ng-class='{                          \
+          "fa-star": isFollowing(item.uid),  \
+          "fa-star-o": !isFollowing(item.uid)\
+        }')
+
     .student-card-menu
       span.dropdown
         i.pointer.fa.fa-angle-down.dropdown-toggle(data-toggle='dropdown')
         ul.dropdown-menu.dropdown-menu-right
-          li.pointer(ng-click='followAction(item.uid)')
-            a
-              i.fa.margin(
-                ng-class='{                                   \
-                  "follow": isFollowing(item.uid),      \
-                  "unfollow": !isFollowing(item.uid),   \
-                  "fa-eye": isFollowing(item.uid),      \
-                  "fa-eye-slash": !isFollowing(item.uid)\
-                }')
-              span.item-name {{ isFollowing(item.uid) ? 'unfollow' : 'follow' | translate }}
           li.pointer(ng-click='edit(item.uid)')
             a
               i.fa.fa-pencil.margin
