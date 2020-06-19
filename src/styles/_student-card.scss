@@ -184,3 +184,15 @@ paginator {
 .small-font {
   font-size: 86%;
 }
+
+
+.is-following {
+  position: absolute;
+  top: 10px;
+  left: 8px;
+  color: $mu-color-disabled;
+}
+
+.fa-star {
+  color: $mu-color-warning;
+}
