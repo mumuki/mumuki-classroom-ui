@@ -14,11 +14,10 @@
           span {{ 'show_students' | translate }}:
           button.btn.btn-link(
               ng-click='toggleOnlyFollowers()',
-              ng-disabled='onlyFollowers()') {{ 'only_followers' | translate }} ({{ followUpsCount }})
-          span -
+              ng-if='onlyFollowers()') {{ 'only_followers' | translate }} ({{ followUpsCount() }})
           button.btn.btn-link(
               ng-click='toggleOnlyFollowers()',
-              ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ totalCount }})
+              ng-if='!onlyFollowers()') {{ 'all' | translate }} ({{ totalCount }})
 
 
       .col-md-4.col-sm-6.pull-right
@@ -73,4 +72,3 @@
       pg-actual-page='actualPage',
       pg-offset='2',
       pg-click='selectPage')
-
