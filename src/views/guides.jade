@@ -10,8 +10,8 @@ mixin accordionPanel(parentId, type, headingId, dataTarget, items)
           div(ng-repeat='item in ' + items + '| orderBy: sortCriteria()', )
             button.list-group-item.noborder-radius(
                 ng-click='open(item)',
-                ng-disabled='item.students == 0',
-                ng-class='{"mu-button-disabled": item.students == 0}')
+                ng-disabled='item.studentsCount == 0',
+                ng-class='{"mu-button-disabled": item.studentsCount == 0}')
               i(class='{{ item.iconClass() }}')
               span.divider-vertical
               span.item-name {{ item.getName() | uppercase }}
