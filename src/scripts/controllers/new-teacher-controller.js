@@ -12,7 +12,7 @@ angular
     };
 
     $scope.addTeacher = () => {
-      Api.updateTeacher($scope.course, $scope.teacher)
+      return Api.updateTeacher($scope.course, $scope.teacher)
         .then(() => toastr.success($filter('translate')('added_teacher')))
         .then(() => $state.go('classroom.courses.course.teachers', $stateParams, { reload: true }))
         .catch((e) => toastr.error(e.data.message))
@@ -23,8 +23,7 @@ angular
     }
 
     $scope.addTeachers = (result) => {
-      Api.addTeachersToCourse($scope.course, result)
-        .then(() => toastr.success($filter('translate')('added_teacher')))
+      return Api.addTeachersToCourse($scope.course, result)
         .catch((e) => toastr.error(e.data.message))
     }
 

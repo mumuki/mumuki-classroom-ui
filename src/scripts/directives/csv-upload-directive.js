@@ -35,6 +35,7 @@ angular
         }
 
         $scope.setCsvAsPristine = () => {
+          angular.element('input[type="file"]').val(null)
           $scope.csv = {
             content: null,
             header: true,
@@ -52,8 +53,10 @@ angular
             result : {
               processed: [],
               processed_count: 0,
-              existing_members: [],
-              existing_members_count: 0,
+              unprocessed: [],
+              unprocessed_count: 0,
+              errored_members: [],
+              errored_members_count: 0,
             }
           }
         };
@@ -69,7 +72,7 @@ angular
 
         $scope.massiveUpload = () => {
           return $scope.massiveUploadClick($scope.csv.result)
-            .then((result) => $scope.response.result = result)
+            .then((result) => _.merge($scope.response.result, result))
             .then(() => $scope.response.finished = true)
             .catch((res) => toastr.error(_.get(res, 'data.message', 'Something wrong happens')))
             .finally(() => $scope.setCsvAsPristine());

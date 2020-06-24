@@ -7,23 +7,21 @@ mixin accordionPanel(parentId, type, headingId, dataTarget, items)
             |  {{ #{type} | translate | uppercase }}
       .panel-collapse.collapse(id='#' + dataTarget, role='tabpanel', aria-labelledby='#' + headingId, , ng-class='{ in: actualChapter(chapter) }')
         .guide-chapter-list
-          button.list-group-item.noborder-radius(ng-repeat='item in ' + items + '| orderBy: sortCriteria() | filter:listSearch:searchComparator', ng-click='open(item)')
-            i(class='{{ item.iconClass() }}')
-            span.divider-vertical
-            span.item-name {{ item.getName() | uppercase }}
-            a.pull-right.mu-has-notification(ng-if='notifications(item).length')
-              i
-              span.badge.badge-notifications {{ notifications(item).length }}
-            label(ng-if='!(' + items + ' | orderBy: sortCriteria() | filter:listSearch:searchComparator).length')
-              | {{ noItemsToShow | translate }}
+          div(ng-repeat='item in ' + items + '| orderBy: sortCriteria()', )
+            button.list-group-item.noborder-radius(
+                ng-click='open(item)',
+                ng-disabled='item.studentsCount == 0',
+                ng-class='{"mu-button-disabled": item.studentsCount == 0}')
+              i(class='{{ item.iconClass() }}')
+              span.divider-vertical
+              span.item-name {{ item.getName() | uppercase }}
+              a.pull-right.mu-has-notification(ng-if='notifications(item).length')
+                i
+                span.badge.badge-notifications {{ notifications(item).length }}
+              label(ng-if='!(' + items + ' | orderBy: sortCriteria() | filter:listSearch:searchComparator).length')
+                | {{ noItemsToShow | translate }}
 
 div
-
-  .input-group
-    i.input-group-addon.fa.fa-search
-    input.form-control(id='filter', placeholder='{{ inputPlaceholder | translate }}', ng-model='listSearch')
-
-  br
 
   div.list-group
     .list-group.no-margin-bottom(ng-repeat='chapter in chapters')

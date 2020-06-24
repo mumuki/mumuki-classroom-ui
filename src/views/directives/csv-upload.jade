@@ -14,9 +14,13 @@
   .single-student(ng-if='!inputType.isMultiple')
     ng-transclude
 
+    br
+
     div(ng-if='!csv.result')
       button.btn.btn-success.modal-form-input.pull-right(ng-click='singleUploadClick()') {{ 'confirm' | translate }}
       button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelClick()') {{ 'cancel' | translate }}
+
+    br
 
   .multiple-student(ng-if='inputType.isMultiple')
 
@@ -33,6 +37,8 @@
       accept='csv.accept',
       upload-button-label='csv.uploadButtonLabel')
 
+    br
+
     div(ng-if='csv.result')
       div
         strong {{ 'members_count_to_process' | translate }}:
@@ -41,15 +47,14 @@
       button.btn.btn-success.modal-form-input.pull-right(ng-click='massiveUpload()') {{ 'confirm' | translate }}
       button.btn.btn-default.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel'  | translate }}
 
+    div(ng-if="response.finished")
+
+      button.list-group-item.noborder-radius(ng-repeat='reportType in ["processed", "unprocessed", "errored_members"]', ng-click='downloadAsCSV(report, response.result[report])')
+        i.fa.fa-fw.fa-download
+        span.divider-vertical
+        span.item-name {{ (reportType + '_count') | translate }}:  {{ response.result[reportType + '_count'] }}
+
+    br
+
     div(ng-if='!csv.result')
       button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelClick()') {{ 'cancel' | translate }}
-
-    div(ng-if="response.finished")
-      div
-        strong {{ 'processed_count' | translate }}:
-        span   {{ response.result.processed_count }}
-        button.btn.btn-link(ng-click="downloadAsCSV('processed', response.result.processed)") {{ 'download_cvs' | translate }}
-      div
-        strong {{ 'errored_count'   | translate }}:
-        span   {{ response.result.existing_members_count }}
-        button.btn.btn-link(ng-click="downloadAsCSV('unprocessed', response.result.existing_members)") {{ 'download_cvs' | translate }}

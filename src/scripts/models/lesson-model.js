@@ -17,6 +17,10 @@ angular
         return this.guide.name;
       }
 
+      get studentsCount() {
+        return this.guide.studentsCount;
+      }
+
       getName() {
         return `${this.number}. ${this.name}`;
       }
