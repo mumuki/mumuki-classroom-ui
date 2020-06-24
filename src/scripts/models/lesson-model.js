@@ -18,7 +18,7 @@ angular
       }
 
       get studentsCount() {
-        return this.guide.students_count;
+        return this.guide.studentsCount;
       }
 
       getName() {
