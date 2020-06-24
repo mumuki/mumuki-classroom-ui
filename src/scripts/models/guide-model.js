@@ -9,6 +9,10 @@ angular
         _.defaults(this, guide);
       }
 
+      get studentsCount() {
+        return this.students_count;
+      }
+
       getName() {
         return this.name;
       }
