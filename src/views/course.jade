@@ -8,7 +8,7 @@
   br
 
   div.row
-    .col-md-2
+    .col-md-2(ng-if="isJanitor")
       button.btn.btn-success(ng-click='goToAddStudents()') {{ 'new_student' | translate }}
     .col-md-6(style='margin-top: 10px')
       a(href='', ng-click='inviteStudents()', ng-if="course.invitationExpired()") {{ 'invite_students' | translate }}
