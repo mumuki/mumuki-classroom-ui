@@ -14,6 +14,7 @@ angular
 
         singleUploadClick: '&?',
         cancelClick: '&?',
+        singleUploadDisabled: '=?',
 
         onlyMassive: '=?',
         isEdit: '=?',
@@ -25,6 +26,7 @@ angular
         $scope.singleUploadClick = $scope.singleUploadClick || rejectedPromise;
         $scope.cancelClick = $scope.cancelClick || rejectedPromise;
 
+        $scope.singleUploadDisabled = $scope.singleUploadDisabled || false;
         $scope.onlyMassive = $scope.onlyMassive || false;
         $scope.isEdit = $scope.isEdit || false;
 
