@@ -255,7 +255,7 @@ span.active-exercise {
     }
   }
 
-  &.input_bottom, &.input_kids {
+  &.input_bottom, &.input_kids, &.input_primary, &.input_kindergarten  {
     @include input-bottom;
     width: 100%;
 
