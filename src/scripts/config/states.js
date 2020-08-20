@@ -86,7 +86,7 @@ angular
               students: ($state, $stateParams, Api) => {
                 return Api
                   .getAllStudents($stateParams)
-                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
+                  .catch(() => $state.go('classroom.courses', $stateParams, { location: 'replace' }));
               }
             }
           }
