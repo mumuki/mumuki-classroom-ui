@@ -25,9 +25,9 @@
           span.input-group-addon
             i.fa.fa-fw.pointer(
               ng-click='toggleIsAscending()',
-              ng-class='{                                   \
-                "fa-sort-amount-asc": options.isAscending,  \
-                "fa-sort-amount-desc": !options.isAscending \
+              ng-class='{                                  \
+                "fa-sort-alpha-asc": options.isAscending,  \
+                "fa-sort-alpha-desc": !options.isAscending \
               }')
           select.form-control(ng-model='options.sortingType')
             option(ng-repeat='x in availableSortingCriteria', value='{{x}}') {{ 'by_' + x | translate }}
