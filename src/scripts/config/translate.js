@@ -1,11 +1,12 @@
 
 angular
   .module('classroom')
-  .config(function ($translateProvider, LANG_EN, LANG_ES, LANG_PT) {
+  .config(function ($translateProvider, LANG_EN, LANG_ES, LANG_ES_CL, LANG_PT) {
 
-    const supportedLocales = ['es', 'en', 'pt'];
+    const supportedLocales = ['es', 'es-CL', 'en', 'pt'];
 
     $translateProvider.translations('es', LANG_ES);
+    $translateProvider.translations('es-CL', LANG_ES_CL);
     $translateProvider.translations('en', LANG_EN);
     $translateProvider.translations('pt', LANG_PT);
 
