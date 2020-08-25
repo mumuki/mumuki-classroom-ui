@@ -4,8 +4,7 @@ angular
   .constant('CONFIG', {
 
     classroom: {
-      api_url: 'http://localhost:3000/classroom/api',
-      //api_url: 'http://localhost:3002',
+      api_url: 'http://localhost:3002',
       url: 'http://localhost:3001'
     },
 
@@ -14,8 +13,7 @@ angular
     },
 
     bibliotheca: {
-      //api_url: 'http://localhost:3004'
-      api_url: 'http://localhost:3000/bibliotheca/api'
+      api_url: 'http://localhost:3004'
     },
 
     cookie: {
