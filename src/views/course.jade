@@ -10,7 +10,7 @@
   div.row
     .col-md-2(ng-if="isJanitor")
       button.btn.btn-success(ng-click='goToAddStudents()') {{ 'new_student' | translate }}
-    .col-md-6(style='margin-top: 10px')
+    .col-md-6(ng-if="isJanitor", style='margin-top: 10px')
       a(href='', ng-click='inviteStudents()', ng-if="course.invitationExpired()") {{ 'invite_students' | translate }}
       p(ng-if="!course.invitationExpired()")
         span {{ 'invitation_link' | translate }}:
