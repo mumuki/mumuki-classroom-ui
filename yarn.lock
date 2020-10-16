@@ -549,7 +549,7 @@
   version "3.1.1"
   resolved "https://codeload.github.com/jquery/jquery-dist/tar.gz/1b30f3ad466ebf2714d47eda34dbd7fdf6849fe3"
 
-"@bower_components/mumuki-emojis@mumuki/mumuki-emojis#v1.0.3":
+"@bower_components/mumuki-emojis@mumuki/mumuki-emojis#1.0.3":
   version "1.0.0"
   resolved "https://codeload.github.com/mumuki/mumuki-emojis/tar.gz/625c522b3e4ab44d8fe982ce8371a306dbf27a7a"
   dependencies:
@@ -559,7 +559,7 @@
     gulp-concat "^2.6.1"
     gulp-replace "^1.0.0"
 
-"@bower_components/mumuki-styles@mumuki/mumuki-styles#v1.21.0":
+"@bower_components/mumuki-styles@mumuki/mumuki-styles#1.21.0":
   version "1.21.0"
   resolved "https://codeload.github.com/mumuki/mumuki-styles/tar.gz/aebe428dee5d6d64c66b4f4eb228357a53061728"
   dependencies:
