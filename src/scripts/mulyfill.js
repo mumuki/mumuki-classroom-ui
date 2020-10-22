@@ -18,3 +18,5 @@ mumuki.kids = {
     // nothing
   }
 };
+
+mumuki.assetsLoadedFor = (_) => {};
