@@ -105,6 +105,7 @@ angular
       $scope.allMessages = false;
 
       currentExercise = assignment.exercise;
+      mumuki.exercise = currentExercise;
 
       $stateParams.eid = currentExercise.eid;
       Breadcrumb.setExercise(currentExercise);
