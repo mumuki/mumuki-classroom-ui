@@ -43,9 +43,10 @@
           li.text-center
             a(ui-sref='classroom.notifications', ng-if="Notification.count() > 5") {{ 'more_notifications' | translate }}
 
-      .dropdown(ng-if='isLoggedIn()')
+      .dropdown.profile-dropdown(ng-if='isLoggedIn()')
 
         img.mu-profile-avatar.dropdown-toggle(ng-src='{{ imageUrl() }}', data-toggle='dropdown')
+        span.caret
 
         ul.dropdown-menu.dropdown-menu-right
           li
