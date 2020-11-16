@@ -16,7 +16,7 @@ angular
     $scope.isTeacher = Permissions.isTeacher;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.Breadcrumb = Breadcrumb;
-    $scope.trust = (notification) => $sce.trustAsHtml($filter('translate')(_.get(notification, 'type', '').toLowerCase(), notification));
+    $scope.trust = (notification) => $sce.trustAsHtml($filter('translate')(_.chain(notification).get('type', '').split('::').last().toLower().value(), notification));
 
     $scope.goToAssignment = Notification.goToAssignment;
 
