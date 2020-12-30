@@ -22,7 +22,7 @@
         span.mu-disabled(ng-if='isCopied') {{ 'copied' | translate }}
     .col-md-4.pull-right.report
       div(ng-if="isAdmin")
-        a(ng-click='export()')
+        a.pointer(ng-click='export()')
           span.view-mode {{ 'export_solutions_button' | translate }}
           i.fa.fa-download
         a#downloadAnchor(style='display:none')

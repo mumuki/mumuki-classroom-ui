@@ -55,9 +55,14 @@ angular
     };
 
     $scope.onlyFollowers = Preferences.onlyFollowers;
-    $scope.toggleOnlyFollowers = Preferences.toggleOnlyFollowers;
+    $scope.toggleOnlyFollowers = () => {
+      Preferences.toggleOnlyFollowers();
+      $scope.params.page = 1;
+      $scope.params.students = mapStudentsParam();
+    }
 
     const mapOrderBy = () => $scope.options.isAscending ? 'asc' : 'desc';
+    const mapStudentsParam = () => $scope.onlyFollowers() ? 'follow' : 'all';
 
     $scope.params = {
       q: '',
@@ -65,6 +70,7 @@ angular
       per_page: $scope.itemsPerPage,
       sort_by: $scope.options.sortingType,
       with_detached: $scope.showDetachedStudents(),
+      students: mapStudentsParam(),
       order_by: mapOrderBy(),
       query_criteria: ''
     };
@@ -78,14 +84,9 @@ angular
       $scope.params.order_by = mapOrderBy();
     };
 
+    $scope.followUpsCount = () => Followers.count($scope.courseSlug());
     $scope.course = () => $stateParams.course;
     $scope.courseSlug = () => `${Domain.tenant()}/${$scope.course()}`;
-
-    Api
-      .getFollowers($scope.course())
-      .then((data) => Followers.setFollowUps(data))
-      .then(() => $scope.followUpsCount = Followers.count($scope.courseSlug()));
-
 
     $scope.offset = () => $scope.itemsPerPage * ($scope.actualPage - 1);
 
@@ -128,5 +129,9 @@ angular
         });
       }, 50);
     }, true);
+
+    Api
+      .getFollowers($scope.course())
+      .then((data) => Followers.setFollowUps(data))
 
   });

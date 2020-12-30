@@ -14,11 +14,10 @@
           span {{ 'show_students' | translate }}:
           button.btn.btn-link(
               ng-click='toggleOnlyFollowers()',
-              ng-disabled='onlyFollowers()') {{ 'only_followers' | translate }} ({{ followUpsCount }})
-          span -
+              ng-if='onlyFollowers()') {{ 'only_followers' | translate }} ({{ followUpsCount() }})
           button.btn.btn-link(
               ng-click='toggleOnlyFollowers()',
-              ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ totalCount }})
+              ng-if='!onlyFollowers()') {{ 'all' | translate }} ({{ totalCount }})
 
 
       .col-md-4.col-sm-6.pull-right
@@ -26,9 +25,9 @@
           span.input-group-addon
             i.fa.fa-fw.pointer(
               ng-click='toggleIsAscending()',
-              ng-class='{                                   \
-                "fa-sort-amount-asc": options.isAscending,  \
-                "fa-sort-amount-desc": !options.isAscending \
+              ng-class='{                                  \
+                "fa-sort-alpha-asc": options.isAscending,  \
+                "fa-sort-alpha-desc": !options.isAscending \
               }')
           select.form-control(ng-model='options.sortingType')
             option(ng-repeat='x in availableSortingCriteria', value='{{x}}') {{ 'by_' + x | translate }}
@@ -62,6 +61,7 @@
             span.view-mode {{ 'export_students' | translate }}
             i.fa.fa-download
           a#downloadAnchor(style='display:none')
+
   .panel-content
     div.col-md-4.col-sm-6.floating-card(ng-repeat='item in list')
       div(ng-include='itemTemplate')
@@ -73,4 +73,3 @@
       pg-actual-page='actualPage',
       pg-offset='2',
       pg-click='selectPage')
-

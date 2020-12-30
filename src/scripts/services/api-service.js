@@ -45,7 +45,7 @@ angular
     this.getGuides = ({ course }) => {
       return $http
         .get(`${API()}/courses/${course}/guides`)
-        .then((res) => _.map(res.data.guides, Guide.from))
+        .then((res) => res.data)
     };
 
     this.getGuideProgress = ({ org, course, repo }, params = {}) => {
@@ -252,7 +252,7 @@ angular
     this.getNotifications = () => {
       return $http
         .get(`${API()}/notifications/unread`, { ignoreLoadingBar: true })
-        .then((res) => res.data)
+        .then((res) => res.data.notifications)
         .catch(() => []);
     };
 
@@ -342,11 +342,20 @@ angular
     }
 
     function reduceMultipleResponse(acc = {}, res = {}) {
-      acc.processed = [..._.get(acc, 'processed', []), ..._.get(res, 'processed', [])],
-      acc.processed_count = _.get(acc, 'processed_count', 0)  + _.get(res, 'processed_count', 0),
-      acc.existing_members = [..._.get(acc, 'existing_members', []), ..._.get(res, 'existing_members', [])],
-      acc.existing_members_count = _.get(acc, 'existing_members_count', 0)  + _.get(res, 'existing_members_count', 0)
+      acc.processed = append('processed', acc, res);
+      acc.unprocessed = append('unprocessed', acc, res);
+      acc.errored_members = append('errored_members', acc, res);
+      acc.processed_count = plus('processed_count', acc, res);
+      acc.unprocessed_count = plus('unprocessed_count', acc, res);
+      acc.errored_members_count = plus('errored_members_count', acc, res);
       return acc;
     }
 
+    function plus(field, obj1, obj2) {
+      return _.get(obj1, field, 0)  + _.get(obj2, field, 0);
+    }
+
+    function append(field, obj1, obj2) {
+      return [... _.get(obj1, field, []), ... _.get(obj2, field, []) ];
+    }
   });
